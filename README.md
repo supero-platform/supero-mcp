@@ -8,7 +8,7 @@ This repo has three things:
 
 - **This guide**: how to connect and build, start to finish.
 - **[Project briefs](projects/README.md)**: 26 apps worth building, in 15 verticals, written as requirements. Pick one and build it.
-- **[Showcase](showcase/README.md)**: apps people have built from the briefs. Add yours.
+- **[Community apps](apps/README.md)**: apps people have built, with source. Run one, add your own, or send a fix to someone else's.
 
 The free plan gives you **3 projects** and needs no card, so you can build three of these without paying anything.
 
@@ -185,9 +185,10 @@ Still stuck? Ask in [Discussions](https://github.com/supero-platform/supero-apps
 
 ## Contribute
 
-There are three ways in, and none of them needs permission first.
+There are four ways in, and none of them needs permission first.
 
-- **Build a brief** and add it to the [showcase](showcase/README.md). Several people can build the same one.
+- **Publish an app.** Build a brief, or your own idea, and add it with its source to [community apps](apps/README.md).
+- **Improve someone else's app.** Deploy it into your own project, fix one of its known gaps, and send the change back.
 - **Write a brief** for an app you wish existed. Copy [projects/TEMPLATE.md](projects/TEMPLATE.md).
 - **Improve this guide**: a client we have not covered, a prompt that works better, an error we did not explain.
 

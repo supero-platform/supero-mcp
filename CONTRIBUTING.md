@@ -6,7 +6,13 @@ Thank you for being here. You do not need to ask before starting any of these.
 
 1. Pick one from [projects/](projects/README.md). Nobody owns a brief: ten people can build the same one, and the differences are the interesting part.
 2. Follow the [README](README.md) to connect, then paste the brief's starter prompt.
-3. Add your build to the [showcase](showcase/README.md).
+3. Add your build, with its source, to the [community apps](apps/README.md).
+
+Your own idea is just as welcome as a brief.
+
+## Improve someone else's app
+
+Each app in [apps/](apps/README.md) lists its known gaps. Deploy the app into your own project, fix one gap, and send a pull request with the changed bundle. One change at a time; say how you checked it. The person who started the app is asked to review, and anyone who lands a fix is added to its contributors line.
 
 The free plan's three projects are enough for this.
 

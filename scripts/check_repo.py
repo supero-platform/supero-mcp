@@ -24,6 +24,11 @@ for p in briefs:
     if f"{p.parent.name}/{p.name}" not in index:
         errors.append(f"{p.relative_to(ROOT)}: not listed in projects/README.md")
 
+for d in (ROOT / "apps").glob("*/*/"):
+    for need in ("README.md", "bundle/schemas.py", "bundle/config.py", "bundle/ui/app.js"):
+        if not (d / need).exists():
+            errors.append(f"{d.relative_to(ROOT)}: missing {need}")
+
 for p in ROOT.rglob("*"):
     if not p.is_file() or ".git" in p.parts:
         continue
@@ -35,7 +40,7 @@ for p in ROOT.rglob("*"):
         continue
     if KEY.search(text):
         errors.append(f"{p.relative_to(ROOT)}: looks like it contains an API key")
-    if p.suffix == ".md" and p.name != "TEMPLATE.md":
+    if p.suffix == ".md" and not p.name.endswith("TEMPLATE.md"):
         for target, _ in LINK.findall(text):
             if "://" in target or target.startswith("mailto:"):
                 continue

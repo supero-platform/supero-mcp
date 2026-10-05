@@ -68,4 +68,4 @@ Work in this order: build_whoami, then build_get_skills to load the spec, then b
 
 ## Built it?
 
-Add your build to the [showcase](../../showcase/README.md). More than one person can build the same brief.
+Add your build to the [community apps](../../apps/README.md). More than one person can build the same brief.

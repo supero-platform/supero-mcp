@@ -4,7 +4,7 @@
 
 **Levels.** *Starter*: one or two roles, an afternoon. *Intermediate*: several roles, a platform service or two, rules about who sees what. *Advanced*: several organisations sharing one app with their data kept apart.
 
-Pick one, paste its starter prompt into a connected assistant, and add the result to the [showcase](../showcase/README.md). To propose a new brief, copy [TEMPLATE.md](TEMPLATE.md).
+Pick one, paste its starter prompt into a connected assistant, and add the result to the [community apps](../apps/README.md). To propose a new brief, copy [TEMPLATE.md](TEMPLATE.md).
 
 ## Education
 
