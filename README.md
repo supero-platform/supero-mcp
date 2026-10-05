@@ -195,11 +195,11 @@ These are the figures on the [pricing page](https://supero.dev/pricing) on 5 Oct
 | A status field will not save for ordinary users | Fields named `status` or `state` are protected | Name lifecycle fields `<something>_state`, for example `booking_state`. |
 | Out of previews | The free plan has ten | Validate more before deploying, or upgrade. |
 
-Still stuck? Ask in [Discussions](https://github.com/supero-platform/supero-apps/discussions). Found a way to make the server misbehave? See [SECURITY.md](SECURITY.md) and report it privately.
+Still stuck? Ask in [Discussions](https://github.com/supero-platform/supero-mcp/discussions). Found a way to make the server misbehave? See [SECURITY.md](SECURITY.md) and report it privately.
 
 ## Contribute
 
-There are four ways in, and none of them needs permission first.
+There are four ways in, and none of them needs permission first. The [open issues](https://github.com/supero-platform/supero-mcp/issues) list good first ones, and we reply within a day.
 
 - **Publish an app.** Build a brief, or your own idea, and add it with its source to [community apps](apps/README.md).
 - **Improve someone else's app.** Deploy it into your own project, fix one of its known gaps, and send the change back.

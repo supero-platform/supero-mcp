@@ -1,7 +1,7 @@
 blank_issues_enabled: true
 contact_links:
   - name: Ask for help
-    url: https://github.com/supero-platform/supero-apps/discussions
+    url: https://github.com/supero-platform/supero-mcp/discussions
     about: Stuck connecting or building? Ask here.
   - name: Report a security problem
     url: https://github.com/supero-platform/supero-mcp/blob/main/SECURITY.md
