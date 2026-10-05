@@ -6,7 +6,7 @@ The free plan, as published on [supero.dev/pricing](https://supero.dev/pricing) 
 |---|---|
 | Price | $0, no card |
 | Projects | 3 |
-| Preview deployments | 10, about 30 minutes each |
+| Preview deployments | 10 per project, about 30 minutes each |
 | Schemas | 20 |
 | API requests | 10,000 a month |
 | Permanent live deployment | From the Basic plan ($9.99 a month) |
@@ -20,7 +20,7 @@ The free plan, as published on [supero.dev/pricing](https://supero.dev/pricing) 
 
 ## Making three projects go a long way
 
-One project is one app. Every brief in this repo is sized to fit inside the free plan's 20 schemas. If you want to start an app again from nothing, `build_replace_project` clears it without using another project (dev mode, domain admin).
+Projects are the limit you are likely to meet first: one project is one app, and running someone else's app from this repo uses one too. Every brief in this repo is sized to fit inside the free plan's 20 schemas. If you want to start an app again from nothing, `build_replace_project` clears it without using another project (dev mode, domain admin).
 
 ## Timing
 

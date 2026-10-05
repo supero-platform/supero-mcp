@@ -161,7 +161,7 @@ The full walk-through is in [docs/build-flow.md](docs/build-flow.md), and every 
 |---|---|
 | Price | $0, no card |
 | Projects | 3 |
-| Preview deployments | 10, about 30 minutes each |
+| Preview deployments | 10 per project, about 30 minutes each |
 | Schemas | 20 |
 | API requests | 10,000 a month |
 | Permanent live URL | From the Basic plan |
@@ -177,7 +177,7 @@ These are the figures on the [pricing page](https://supero.dev/pricing) on 5 Oct
 | The assistant cannot create a project | You gave it a project key | Create the project in the dashboard, or use a domain key. |
 | The assistant looks for a CLI or a `SKILLS.md` file | It is guessing from old habits | Send the recovery prompt from step 4. |
 | `build_validate` fails | The bundle breaks a rule | Let the assistant fix what it lists and run it again. This step is free. |
-| Workflows do not fire, or the log says `event_bindings: PUT failed` | A project key cannot register workflow triggers yet | Use a domain key for apps that need workflows, or leave the workflow out for now. |
+| Workflows do not fire, or the log says `event_bindings: PUT failed` | Workflow triggers are not registered on MCP deploys yet. We are investigating | Leave the workflow out for now and note it as a known gap. |
 | The app deployed but screens are half empty | Some starter data may not have been created | Ask the assistant to call `build_logs` and look for `SEED FAILURES`. Deploying again usually fills the gaps. |
 | Deploy stays in `launching` | The app is still starting | Wait. Poll for up to ten minutes. |
 | A status field will not save for ordinary users | Fields named `status` or `state` are protected | Name lifecycle fields `<something>_state`, for example `booking_state`. |
