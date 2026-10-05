@@ -1,6 +1,6 @@
 # Time-off requests
 
-**Vertical:** HR · **Level:** Starter · **Status:** open
+**Vertical:** HR · **Level:** Starter · **Build status:** not yet built by anyone
 
 Employees request leave, a manager approves it, and everyone sees a team calendar.
 

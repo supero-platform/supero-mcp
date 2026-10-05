@@ -1,6 +1,8 @@
 # Local delivery dispatch
 
-**Vertical:** Logistics · **Level:** Intermediate · **Status:** open
+**Vertical:** Logistics · **Level:** Intermediate · **Build status:** not yet built by anyone
+
+> **Needs a domain key today.** This brief uses `workflows`, and a project key cannot register workflow triggers yet. Build it with a domain key, or leave the workflow out and list it as a known gap.
 
 A dispatcher assigns deliveries to drivers, and the customer signs on the doorstep.
 

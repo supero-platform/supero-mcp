@@ -177,6 +177,8 @@ These are the figures on the [pricing page](https://supero.dev/pricing) on 5 Oct
 | The assistant cannot create a project | You gave it a project key | Create the project in the dashboard, or use a domain key. |
 | The assistant looks for a CLI or a `SKILLS.md` file | It is guessing from old habits | Send the recovery prompt from step 4. |
 | `build_validate` fails | The bundle breaks a rule | Let the assistant fix what it lists and run it again. This step is free. |
+| Workflows do not fire, or the log says `event_bindings: PUT failed` | A project key cannot register workflow triggers yet | Use a domain key for apps that need workflows, or leave the workflow out for now. |
+| The app deployed but screens are half empty | Some starter data may not have been created | Ask the assistant to call `build_logs` and look for `SEED FAILURES`. Deploying again usually fills the gaps. |
 | Deploy stays in `launching` | The app is still starting | Wait. Poll for up to ten minutes. |
 | A status field will not save for ordinary users | Fields named `status` or `state` are protected | Name lifecycle fields `<something>_state`, for example `booking_state`. |
 | Out of previews | The free plan has ten | Validate more before deploying, or upgrade. |

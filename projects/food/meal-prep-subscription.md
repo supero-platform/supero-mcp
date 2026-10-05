@@ -1,6 +1,6 @@
 # Weekly meal-prep subscription
 
-**Vertical:** Food · **Level:** Intermediate · **Status:** open
+**Vertical:** Food · **Level:** Intermediate · **Build status:** not yet built by anyone
 
 Customers subscribe to weekly meals, choose from this week's menu, and can skip a week.
 

@@ -1,6 +1,6 @@
 # Pet grooming salon
 
-**Vertical:** Pets · **Level:** Starter · **Status:** open
+**Vertical:** Pets · **Level:** Starter · **Build status:** not yet built by anyone
 
 Owners book a groom for their pet, and the salon sees the day's appointments.
 

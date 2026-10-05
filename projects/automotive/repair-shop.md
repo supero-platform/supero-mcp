@@ -1,6 +1,6 @@
 # Car repair shop job cards
 
-**Vertical:** Automotive · **Level:** Intermediate · **Status:** open
+**Vertical:** Automotive · **Level:** Intermediate · **Build status:** not yet built by anyone
 
 A garage quotes a repair, gets the customer's approval, and tracks the job and the parts.
 

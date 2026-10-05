@@ -1,6 +1,8 @@
 # Donor and pledge tracker
 
-**Vertical:** Nonprofit · **Level:** Intermediate · **Status:** open
+**Vertical:** Nonprofit · **Level:** Intermediate · **Build status:** not yet built by anyone
+
+> **Needs a domain key today.** This brief uses `workflows`, and a project key cannot register workflow triggers yet. Build it with a domain key, or leave the workflow out and list it as a known gap.
 
 A small charity records donors, campaigns and pledges, and sees what has actually come in.
 

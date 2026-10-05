@@ -1,6 +1,6 @@
 # Tutoring marketplace
 
-**Vertical:** Education · **Level:** Intermediate · **Status:** open
+**Vertical:** Education · **Level:** Intermediate · **Build status:** not yet built by anyone
 
 Students find a tutor by subject, book a session and leave a review.
 

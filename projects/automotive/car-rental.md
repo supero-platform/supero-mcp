@@ -1,6 +1,6 @@
 # Independent car rental
 
-**Vertical:** Automotive · **Level:** Intermediate · **Status:** open
+**Vertical:** Automotive · **Level:** Intermediate · **Build status:** not yet built by anyone
 
 A small rental firm shows its fleet, takes reservations, and checks cars out and back in.
 

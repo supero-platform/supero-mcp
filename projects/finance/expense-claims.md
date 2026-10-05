@@ -1,6 +1,6 @@
 # Expense claims
 
-**Vertical:** Finance · **Level:** Starter · **Status:** open
+**Vertical:** Finance · **Level:** Starter · **Build status:** not yet built by anyone
 
 Staff submit expenses with a receipt, and a manager approves them.
 

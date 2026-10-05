@@ -1,6 +1,6 @@
 # [App name]
 
-**Vertical:** [vertical] · **Level:** [Starter | Intermediate | Advanced] · **Status:** open
+**Vertical:** [vertical] · **Level:** [Starter | Intermediate | Advanced] · **Build status:** not yet built by anyone
 
 [One sentence: who does what.]
 

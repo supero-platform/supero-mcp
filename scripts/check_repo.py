@@ -19,8 +19,8 @@ for p in briefs:
     for s in SECTIONS:
         if s not in text:
             errors.append(f"{p.relative_to(ROOT)}: missing section '{s}'")
-    if not re.search(r"\*\*Level:\*\* (Starter|Intermediate|Advanced)", text):
-        errors.append(f"{p.relative_to(ROOT)}: Level must be Starter, Intermediate or Advanced")
+    if not re.search(r"\*\*Level:\*\* (Starter|Intermediate|Advanced) · \*\*Build status:\*\* ", text):
+        errors.append(f"{p.relative_to(ROOT)}: needs Level (Starter, Intermediate or Advanced) and Build status")
     if f"{p.parent.name}/{p.name}" not in index:
         errors.append(f"{p.relative_to(ROOT)}: not listed in projects/README.md")
 

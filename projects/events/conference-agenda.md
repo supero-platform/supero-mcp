@@ -1,6 +1,6 @@
 # Conference agenda and tickets
 
-**Vertical:** Events · **Level:** Intermediate · **Status:** open
+**Vertical:** Events · **Level:** Intermediate · **Build status:** not yet built by anyone
 
 A small conference publishes its programme, sells tickets, and lets attendees build a personal schedule.
 

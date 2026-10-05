@@ -1,6 +1,6 @@
 # Permit applications
 
-**Vertical:** Public sector · **Level:** Intermediate · **Status:** open
+**Vertical:** Public sector · **Level:** Intermediate · **Build status:** not yet built by anyone
 
 A resident applies for a permit, a reviewer checks it, and a manager signs it off.
 

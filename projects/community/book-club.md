@@ -1,6 +1,8 @@
 # Book club
 
-**Vertical:** Community · **Level:** Starter · **Status:** open
+**Vertical:** Community · **Level:** Starter · **Build status:** built once by us, without its workflow (see note)
+
+> **Needs a domain key today.** This brief uses `workflows`, and a project key cannot register workflow triggers yet. Build it with a domain key, or leave the workflow out and list it as a known gap.
 
 Members propose books, vote on next month's read, and RSVP to the monthly meeting.
 

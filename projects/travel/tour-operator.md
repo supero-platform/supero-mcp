@@ -1,6 +1,6 @@
 # Day-tour operator
 
-**Vertical:** Travel · **Level:** Intermediate · **Status:** open
+**Vertical:** Travel · **Level:** Intermediate · **Build status:** not yet built by anyone
 
 A tour company sells seats on dated departures and never sells more than the bus holds.
 

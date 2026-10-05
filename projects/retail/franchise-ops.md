@@ -1,6 +1,8 @@
 # Franchise store checks
 
-**Vertical:** Retail · **Level:** Advanced · **Status:** open
+**Vertical:** Retail · **Level:** Advanced · **Build status:** not yet built by anyone
+
+> **Needs a domain key today.** This brief uses `workflows`, and a project key cannot register workflow triggers yet. Build it with a domain key, or leave the workflow out and list it as a known gap.
 
 Head office sets store standards, each franchisee runs their own checks, and nobody sees another franchisee's results.
 

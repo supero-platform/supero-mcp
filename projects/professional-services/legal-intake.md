@@ -1,6 +1,6 @@
 # Client intake for a small law office
 
-**Vertical:** Professional services · **Level:** Intermediate · **Status:** open
+**Vertical:** Professional services · **Level:** Intermediate · **Build status:** not yet built by anyone
 
 A solicitor takes a new client's details, opens a matter, and gets the engagement letter signed.
 

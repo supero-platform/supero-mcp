@@ -1,6 +1,6 @@
 # Catering quotes and orders
 
-**Vertical:** Food · **Level:** Intermediate · **Status:** open
+**Vertical:** Food · **Level:** Intermediate · **Build status:** not yet built by anyone
 
 A caterer turns an enquiry into a quote, the customer accepts it, and the kitchen gets a prep list.
 

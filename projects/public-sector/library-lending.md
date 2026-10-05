@@ -1,6 +1,6 @@
 # Community library lending
 
-**Vertical:** Public sector · **Level:** Starter · **Status:** open
+**Vertical:** Public sector · **Level:** Starter · **Build status:** not yet built by anyone
 
 A small library lends items, takes reservations, and knows what is overdue.
 

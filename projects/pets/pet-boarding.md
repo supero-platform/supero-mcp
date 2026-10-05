@@ -1,6 +1,6 @@
 # Pet boarding kennel
 
-**Vertical:** Pets · **Level:** Intermediate · **Status:** open
+**Vertical:** Pets · **Level:** Intermediate · **Build status:** not yet built by anyone
 
 A kennel takes multi-night bookings against a fixed number of pens.
 

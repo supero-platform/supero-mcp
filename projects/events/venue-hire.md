@@ -1,6 +1,6 @@
 # Venue and room hire
 
-**Vertical:** Events · **Level:** Starter · **Status:** open
+**Vertical:** Events · **Level:** Starter · **Build status:** not yet built by anyone
 
 A community hall rents its rooms by the hour and keeps a diary nobody has to phone for.
 

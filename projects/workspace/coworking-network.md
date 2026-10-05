@@ -1,6 +1,6 @@
 # Coworking network
 
-**Vertical:** Workspace · **Level:** Advanced · **Status:** open
+**Vertical:** Workspace · **Level:** Advanced · **Build status:** not yet built by anyone
 
 Several coworking locations share one app, and each location sees only its own members and bookings.
 

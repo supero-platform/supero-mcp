@@ -1,6 +1,8 @@
 # Course enrolment with a waitlist
 
-**Vertical:** Education · **Level:** Starter · **Status:** open
+**Vertical:** Education · **Level:** Starter · **Build status:** not yet built by anyone
+
+> **Needs a domain key today.** This brief uses `workflows`, and a project key cannot register workflow triggers yet. Build it with a domain key, or leave the workflow out and list it as a known gap.
 
 A small school publishes courses, fills them, and runs a waitlist when they are full.
 

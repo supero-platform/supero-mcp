@@ -1,6 +1,6 @@
 # Agency work tracker with a client view
 
-**Vertical:** Professional services · **Level:** Intermediate · **Status:** open
+**Vertical:** Professional services · **Level:** Intermediate · **Build status:** not yet built by anyone
 
 A small agency tracks jobs and hours, and each client sees only their own work.
 

@@ -1,6 +1,6 @@
 # Warehouse dock booking
 
-**Vertical:** Logistics · **Level:** Starter · **Status:** open
+**Vertical:** Logistics · **Level:** Starter · **Build status:** not yet built by anyone
 
 Carriers book an unloading slot at a warehouse dock.
 
