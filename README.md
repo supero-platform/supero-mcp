@@ -12,6 +12,18 @@ This repo has three things:
 
 The free plan gives you **3 projects** and needs no card, so you can build three of these without paying anything.
 
+## Start here
+
+| If you want to | Go to |
+|---|---|
+| Build your first app, with every step spelled out | **[Your first app, step by step](docs/first-app.md)** (30 minutes) |
+| Choose something to build | [Picking a project](docs/pick-a-project.md), then the [project list](projects/README.md) |
+| See a finished example with its source | [Page Turners, a book club app](apps/community/book-club/README.md) |
+| Fix something in an app that exists | [Community apps](apps/README.md#improve-someone-elses) |
+| Read about a platform feature | [Learn more on docs.supero.dev](docs/learn-more.md) |
+
+The rest of this page is the short version for people who have done this before.
+
 ## Contents
 
 1. [Get a key](#1-get-a-key)
@@ -199,7 +211,7 @@ There are four ways in, and none of them needs permission first.
 ## Related
 
 - [supero-apps](https://github.com/supero-platform/supero-apps): 19 complete reference apps with source and live demos.
-- [MCP documentation](https://docs.supero.dev/developers/mcp/overview) on docs.supero.dev.
+- [MCP documentation](https://docs.supero.dev/developers/mcp/overview/) on docs.supero.dev, and a [guide to the feature pages](docs/learn-more.md) most useful while building.
 
 ## Licence
 

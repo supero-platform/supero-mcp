@@ -1,6 +1,6 @@
 # Book club
 
-**Vertical:** Community · **Level:** Starter · **Build status:** built once by us, without its workflow (see note)
+**Vertical:** Community · **Level:** Starter · **Build status:** built once, without its workflow: [Page Turners](../../apps/community/book-club/README.md)
 
 > **Workflows do not work on MCP deploys yet.** This brief uses `workflows`. When an app is deployed through MCP today, its workflow triggers are not registered, and we are investigating. Build the rest of the app, leave the workflow out, and list it as a known gap.
 

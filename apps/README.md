@@ -4,7 +4,8 @@ Apps people have built on Supero over MCP, with their source. Anyone can add one
 
 | App | What it is | Started by | From brief | State |
 |---|---|---|---|---|
-| *Be the first.* | | | | |
+| [Page Turners](community/book-club/README.md) | A book club: propose, vote, RSVP | Supero team | [Book club](../projects/community/book-club.md) | Working, 7 known gaps |
+| *Yours next.* | | | | |
 
 ## Run one
 
