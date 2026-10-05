@@ -16,6 +16,14 @@ Each app in [apps/](apps/README.md) lists its known gaps. Deploy the app into yo
 
 The free plan's three projects are enough for this.
 
+## Do I need to claim anything?
+
+| You want to | Claim it? |
+|---|---|
+| Build a brief, or your own idea | No. Just build it. Several builds of one brief are welcome, each in its own folder. |
+| Fix a known gap in an existing app | Yes. Comment on its issue first. We reply within a day, and free it again after a week of silence. |
+| Write a new brief or improve the guide | No. Open the pull request. |
+
 ## Write a brief
 
 Copy [projects/TEMPLATE.md](projects/TEMPLATE.md) to `projects/<vertical>/<short-name>.md` and add a row to [projects/README.md](projects/README.md). A good brief:

@@ -30,7 +30,7 @@ It deploys into **your** project, on your account. Nothing you do touches the au
 Your app can come from a [brief](../projects/README.md) or be entirely your own idea.
 
 1. Build it and check it works on a preview.
-2. Make a folder: `apps/<vertical>/<app-name>/`.
+2. Make a folder: `apps/<vertical>/<your-app-name>/`. Give your build its own name (Page Turners, not "book-club"). If the name is taken, add your GitHub name: `page-turners-yourname`.
 3. Put in it:
    - `README.md`, copied from [APP-TEMPLATE.md](APP-TEMPLATE.md): what it does, who uses it, who can see what, how to sign in to a fresh deploy, which assistant built it, and what is known not to work yet.
    - `screenshot.png`: one screen.
@@ -38,6 +38,12 @@ Your app can come from a [brief](../projects/README.md) or be entirely your own 
 4. Add a row to the table above and open a pull request.
 
 Your name goes in the "Started by" column and stays there.
+
+## Several people, one brief
+
+You do not claim a brief, and you do not need to ask. Any number of people can build the same one, and every build that has its source, a screenshot and an honest list of gaps is listed here. We do not pick a winner. Comparing how different people and different assistants handled the same rules is half the value.
+
+When a brief has more than one build, the table groups them, and the one that is furthest along is marked **start here** so that fixes gather in one place. That mark moves if another build overtakes it.
 
 ## Improve someone else's
 
@@ -47,6 +53,8 @@ This is the part we hope catches on. Every app here is unfinished in some way, a
 2. Deploy it into your own project with the prompt above.
 3. Ask your assistant for the change, starting from the files in `bundle/`. Check it on a preview.
 4. Save the changed bundle back into the folder and open a pull request that says what you changed and how you checked it.
+
+Fixes are the one place to speak up first: comment on the gap's issue before you start, so two people do not make the same change. We reply within a day. If a claimed fix has had no activity for a week, we ask, and then free it for someone else.
 
 One change per pull request. A fix to an access rule, a missing screen, a clearer label and a test are all welcome. If your change is large, open an issue first so the person who started the app can weigh in.
 
