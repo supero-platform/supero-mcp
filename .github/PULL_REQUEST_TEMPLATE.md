@@ -1,6 +1,7 @@
 **What this adds**
 
-- [ ] A showcase entry
+- [ ] A new app
+- [ ] A fix to an existing app
 - [ ] A new brief
 - [ ] A fix to the guide
 

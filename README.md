@@ -37,7 +37,7 @@ The free plan gives you **3 projects** and needs no card, so you can build three
 
 The key starts with `ak_` and is shown **once**. Copy it then. If you lose it, rotate it under **API Keys** to get a new one.
 
-Treat the key like a password. Do not commit it, and do not paste it into an issue or a showcase entry.
+Treat the key like a password. Do not commit it, and do not paste it into an issue or an app folder.
 
 ## 2. Connect your assistant
 
