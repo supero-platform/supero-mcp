@@ -64,6 +64,8 @@ Call build_whoami on Supero and tell me what it says.
 
 For a first app, pick a **Starter** brief in the [project list](../projects/README.md). Good first choices:
 
+- [Public changelog](../projects/developer-tools/public-changelog.md), if you want something for your own product
+- [Beta waitlist with invites](../projects/developer-tools/beta-waitlist.md)
 - [Pet grooming salon](../projects/pets/grooming-salon.md)
 - [Venue and room hire](../projects/events/venue-hire.md)
 - [Time-off requests](../projects/hr/time-off-requests.md)

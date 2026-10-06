@@ -1,12 +1,22 @@
 # Project briefs
 
-26 apps worth building, in 15 verticals. Each brief says who uses the app, what it keeps track of, who may see what, and how to tell when it is done. None of them says how to build it: that is your assistant's job, and yours.
+31 apps worth building, in 16 verticals. Each brief says who uses the app, what it keeps track of, who may see what, and how to tell when it is done. None of them says how to build it: that is your assistant's job, and yours.
 
 **Levels.** *Starter*: one or two roles, an afternoon. *Intermediate*: several roles, a platform service or two, rules about who sees what. *Advanced*: several organisations sharing one app with their data kept apart.
 
-**Buildable today.** All 26 briefs can be built in full on the free plan with a project key, including the eight that use `workflows`. Only the book club has been built so far.
+**Buildable today.** All 31 briefs can be built in full on the free plan with a project key, including the eight that use `workflows`. Only the book club has been built so far.
 
 Pick one, paste its starter prompt into a connected assistant, and add the result to the [community apps](../apps/README.md). To propose a new brief, copy [TEMPLATE.md](TEMPLATE.md).
+
+## Developer tools
+
+| Brief | Level | Buildable today | What it is |
+|---|---|---|---|
+| [Feature-request board](developer-tools/feature-request-board.md) | Intermediate | Yes | Users post ideas and vote on them, and the team shows what it plans to do about each one. |
+| [Public changelog](developer-tools/public-changelog.md) | Starter | Yes | A team publishes dated release notes that anyone can read and filter. |
+| [Status page](developer-tools/status-page.md) | Intermediate | Yes | A service shows which of its parts are working and keeps a public record of incidents. |
+| [Freelancer invoices](developer-tools/freelancer-invoices.md) | Intermediate | Yes | A freelancer bills clients, and each client sees only their own invoices. |
+| [Beta waitlist with invites](developer-tools/beta-waitlist.md) | Starter | Yes | People join a waitlist for a product, see their place in line, and are let in a batch at a time. |
 
 ## Education
 

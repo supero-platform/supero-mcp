@@ -7,7 +7,7 @@ You describe the app. Your assistant (Claude Code, Cursor, VS Code Copilot, or a
 This repo has three things:
 
 - **This guide**: how to connect and build, start to finish.
-- **[Project briefs](projects/README.md)**: 26 apps worth building, in 15 verticals, written as requirements. Pick one and build it.
+- **[Project briefs](projects/README.md)**: 31 apps worth building, in 16 verticals, written as requirements. Pick one and build it.
 - **[Community apps](apps/README.md)**: apps people have built, with source. Run one, add your own, or send a fix to someone else's.
 
 The free plan gives you **3 projects** and needs no card, so you can build three of these without paying anything.
