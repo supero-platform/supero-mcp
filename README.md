@@ -189,8 +189,8 @@ These are the figures on the [pricing page](https://supero.dev/pricing) on 5 Oct
 | The assistant cannot create a project | You gave it a project key | Create the project in the dashboard, or use a domain key. |
 | The assistant looks for a CLI or a `SKILLS.md` file | It is guessing from old habits | Send the recovery prompt from step 4. |
 | `build_validate` fails | The bundle breaks a rule | Let the assistant fix what it lists and run it again. This step is free. |
-| Workflows do not fire, or the log says `event_bindings: PUT failed` | Workflow triggers are not registered on MCP deploys yet. We are investigating | Leave the workflow out for now and note it as a known gap. |
-| The app deployed but screens are half empty | Some starter data may not have been created | Ask the assistant to call `build_logs` and look for `SEED FAILURES`. Deploying again usually fills the gaps. |
+| `build_doctor` warns that `workflows` "usually need elevated permission" | That warning is out of date | Ignore it. Workflows register and run with a project key (checked 6 October 2026). |
+| The app deployed but screens are half empty | Some starter data may not have been created. This was a platform fault, fixed on 5 October 2026 | If you still see it, ask the assistant to call `build_logs` and look for `SEED FAILURES`, deploy again, and please open an issue. |
 | Deploy stays in `launching` | The app is still starting | Wait. Poll for up to ten minutes. |
 | A status field will not save for ordinary users | Fields named `status` or `state` are protected | Name lifecycle fields `<something>_state`, for example `booking_state`. |
 | Out of previews | The free plan has ten | Validate more before deploying, or upgrade. |

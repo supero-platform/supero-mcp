@@ -2,8 +2,6 @@
 
 **Vertical:** Education · **Level:** Starter · **Build status:** not yet built by anyone
 
-> **Workflows do not work on MCP deploys yet.** This brief uses `workflows`. When an app is deployed through MCP today, its workflow triggers are not registered, and we are investigating. Build the rest of the app, leave the workflow out, and list it as a known gap.
-
 A small school publishes courses, fills them, and runs a waitlist when they are full.
 
 ## The problem

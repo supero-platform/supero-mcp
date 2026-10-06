@@ -13,7 +13,7 @@ There are three ways to take part. Pick by how much time you have.
 Open the [project list](../projects/README.md) and look at three columns.
 
 - **Level.** *Starter* has one or two roles. *Intermediate* has several roles and rules about who sees what. *Advanced* keeps several organisations' data apart in one app.
-- **Buildable today.** "Yes" means everything in the brief can be built now. "Not fully (workflows)" means the brief includes an automation that cannot be deployed through MCP yet; you can build the rest and list the workflow as a known gap.
+- **Buildable today.** Every brief can be built in full on the free plan.
 - **What it is.** Pick something you understand from real life. You will be the one judging whether the app is right, and that is much easier for a trade you know.
 
 You do not need to ask before starting, and nobody owns a brief. Several people building the same one is welcome: the differences are interesting.

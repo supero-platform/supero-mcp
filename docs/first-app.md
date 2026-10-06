@@ -62,7 +62,7 @@ Call build_whoami on Supero and tell me what it says.
 
 ## Step 6. Choose what to build (2 minutes)
 
-For a first app, pick a **Starter** brief marked **Buildable today: Yes** in the [project list](../projects/README.md). Good first choices:
+For a first app, pick a **Starter** brief in the [project list](../projects/README.md). Good first choices:
 
 - [Pet grooming salon](../projects/pets/grooming-salon.md)
 - [Venue and room hire](../projects/events/venue-hire.md)
@@ -129,7 +129,7 @@ If screens are empty, tell the assistant:
 Call build_logs and look for SEED FAILURES. If there are any, deploy again and re-check.
 ```
 
-A status of `running` means the app started. It does not mean everything in it was created, so always look.
+A status of `running` means the app started. The tools do not yet confirm that everything in it was created, so always look.
 
 ## Step 12. Change something (5 minutes)
 

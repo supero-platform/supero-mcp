@@ -22,5 +22,5 @@ class AppConfig:
         {"email": "testapp@test.com", "password": "Password123!", "role": "developer",
          "full_name": "App Tester", "tenant": "default-tenant"},
     ])
-    services: list = field(default_factory=lambda: [])
+    services: list = field(default_factory=lambda: ["workflows"])
     public_schemas: list = field(default_factory=lambda: [])

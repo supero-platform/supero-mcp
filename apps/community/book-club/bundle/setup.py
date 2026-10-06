@@ -113,6 +113,26 @@ RSVPS = [
 ]
 
 
+WORKFLOW_DEFINITIONS = [
+    {
+        "workflow_id": "rsvp_received", "display_name": "RSVP received",
+        "description": "Stamps a new RSVP as processed when it is created (event-bound @create:lumen:rsvp).",
+        "version": "1.0.0", "enabled": True, "status": "Active", "on_error": "continue",
+        "input_schema": {"rsvp_uuid": {"type": "string", "required": True}},
+        "steps": [
+            {"id": "stamp", "type": "crud_operation", "operation": "update",
+             "object_type": "lumen:rsvp", "record_uuid": "{{input.rsvp_uuid}}",
+             "data": {"workflow_status": "processed", "processed_at": "{{context.timestamp}}"}},
+        ],
+    },
+]
+
+EVENT_BINDINGS = [
+    {"event": "@create:lumen:rsvp", "workflow_id": "rsvp_received",
+     "input_map": {"rsvp_uuid": "uuid"}},
+]
+
+
 def seed_test_data(s, base, domain, tenant_uuid, progress):
     books = {}
     for (slug, title, author, genre, pages, pitch, pid, cycle, state, pname, pemail) in BOOKS:
@@ -165,7 +185,8 @@ def seed_test_data(s, base, domain, tenant_uuid, progress):
 
 def main():
     setup = AppSetup(AppConfig(), ALL_SCHEMAS, PUBLIC_SCHEMAS)
-    setup.run(seed_fn=seed_test_data, policies=POLICIES)
+    setup.run(seed_fn=seed_test_data, policies=POLICIES,
+              workflow_definitions=WORKFLOW_DEFINITIONS, event_bindings=EVENT_BINDINGS)
 
 
 if __name__ == "__main__":

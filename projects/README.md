@@ -4,7 +4,7 @@
 
 **Levels.** *Starter*: one or two roles, an afternoon. *Intermediate*: several roles, a platform service or two, rules about who sees what. *Advanced*: several organisations sharing one app with their data kept apart.
 
-**Buildable today.** Eight briefs use `workflows`, which do not work on MCP deploys yet; everything else in those briefs can be built. No brief has been built and verified end to end yet. The book club was built once, without its workflow.
+**Buildable today.** All 26 briefs can be built in full on the free plan with a project key, including the eight that use `workflows`. Only the book club has been built so far.
 
 Pick one, paste its starter prompt into a connected assistant, and add the result to the [community apps](../apps/README.md). To propose a new brief, copy [TEMPLATE.md](TEMPLATE.md).
 
@@ -13,27 +13,27 @@ Pick one, paste its starter prompt into a connected assistant, and add the resul
 | Brief | Level | Buildable today | What it is |
 |---|---|---|---|
 | [Tutoring marketplace](education/tutoring-marketplace.md) | Intermediate | Yes | Students find a tutor by subject, book a session and leave a review. |
-| [Course enrolment with a waitlist](education/course-enrolment.md) | Starter | Not fully (workflows) | A small school publishes courses, fills them, and runs a waitlist when they are full. |
+| [Course enrolment with a waitlist](education/course-enrolment.md) | Starter | Yes | A small school publishes courses, fills them, and runs a waitlist when they are full. |
 
 ## Nonprofit
 
 | Brief | Level | Buildable today | What it is |
 |---|---|---|---|
-| [Volunteer shift scheduling](nonprofit/volunteer-scheduling.md) | Starter | Not fully (workflows) | A charity posts shifts and volunteers sign up for them. |
-| [Donor and pledge tracker](nonprofit/donation-tracker.md) | Intermediate | Not fully (workflows) | A small charity records donors, campaigns and pledges, and sees what has actually come in. |
+| [Volunteer shift scheduling](nonprofit/volunteer-scheduling.md) | Starter | Yes | A charity posts shifts and volunteers sign up for them. |
+| [Donor and pledge tracker](nonprofit/donation-tracker.md) | Intermediate | Yes | A small charity records donors, campaigns and pledges, and sees what has actually come in. |
 
 ## HR
 
 | Brief | Level | Buildable today | What it is |
 |---|---|---|---|
 | [Time-off requests](hr/time-off-requests.md) | Starter | Yes | Employees request leave, a manager approves it, and everyone sees a team calendar. |
-| [Applicant tracking board](hr/applicant-tracking.md) | Intermediate | Not fully (workflows) | A hiring team moves candidates through stages and keeps interview notes away from the candidate. |
+| [Applicant tracking board](hr/applicant-tracking.md) | Intermediate | Yes | A hiring team moves candidates through stages and keeps interview notes away from the candidate. |
 
 ## Logistics
 
 | Brief | Level | Buildable today | What it is |
 |---|---|---|---|
-| [Local delivery dispatch](logistics/delivery-dispatch.md) | Intermediate | Not fully (workflows) | A dispatcher assigns deliveries to drivers, and the customer signs on the doorstep. |
+| [Local delivery dispatch](logistics/delivery-dispatch.md) | Intermediate | Yes | A dispatcher assigns deliveries to drivers, and the customer signs on the doorstep. |
 | [Warehouse dock booking](logistics/dock-booking.md) | Starter | Yes | Carriers book an unloading slot at a warehouse dock. |
 
 ## Events
@@ -47,8 +47,8 @@ Pick one, paste its starter prompt into a connected assistant, and add the resul
 
 | Brief | Level | Buildable today | What it is |
 |---|---|---|---|
-| [Book club](community/book-club.md) | Starter | Not fully (workflows) | Members propose books, vote on next month's read, and RSVP to the monthly meeting. |
-| [Amateur sports league](community/sports-league.md) | Intermediate | Not fully (workflows) | A local league publishes fixtures, records results, and keeps the table up to date. |
+| [Book club](community/book-club.md) | Starter | Yes | Members propose books, vote on next month's read, and RSVP to the monthly meeting. |
+| [Amateur sports league](community/sports-league.md) | Intermediate | Yes | A local league publishes fixtures, records results, and keeps the table up to date. |
 
 ## Professional services
 
@@ -107,4 +107,4 @@ Pick one, paste its starter prompt into a connected assistant, and add the resul
 
 | Brief | Level | Buildable today | What it is |
 |---|---|---|---|
-| [Franchise store checks](retail/franchise-ops.md) | Advanced | Not fully (workflows) | Head office sets store standards, each franchisee runs their own checks, and nobody sees another franchisee's results. |
+| [Franchise store checks](retail/franchise-ops.md) | Advanced | Yes | Head office sets store standards, each franchisee runs their own checks, and nobody sees another franchisee's results. |

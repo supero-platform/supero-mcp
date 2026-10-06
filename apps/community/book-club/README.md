@@ -8,6 +8,7 @@ Members propose books, vote on next month's read, and RSVP to the monthly meetin
 
 ## What it does
 
+- **A workflow:** each new RSVP triggers a small workflow that marks it processed.
 - **This month:** the selected book and the next meeting.
 - **Vote:** one vote per member for next month's read, changeable until the meeting, with a running tally.
 - **Propose a book:** title, author and a short pitch.
@@ -33,7 +34,7 @@ These are demo accounts with a public password. The bundle also seeds a `develop
 
 This is where you come in. Each of these is a good first contribution.
 
-- [ ] **No workflow.** The brief asks for one (for example, a reminder to members who have not RSVPed). It was removed because workflow triggers are not registered on MCP deploys yet.
+- [ ] **The workflow is a token one.** When a member RSVPs, a workflow stamps the RSVP as processed. The brief suggests something useful, such as a reminder to members who have not RSVPed (sent only to their own signed-in address).
 - [ ] **The organiser cannot open or close a voting round.** Voting is always open. The brief's "votes cannot be cast after the round closes" is not met.
 - [ ] **A member can vote once per round only because the screen says so.** Nobody has checked that a second vote sent straight to the API is refused.
 - [ ] **A member cannot withdraw a vote or an RSVP**, only change it.
@@ -49,4 +50,5 @@ Built on 5 October 2026 from the one-paragraph brief, with a project key.
 - `build_validate`, `build_doctor` and `build_publish` passed first time.
 - The first deploy reported success but was missing 8 of its starter records. `build_logs` showed why (`SEED FAILURES`), and deploying again filled the gaps. Look at the app, not only at the status.
 - After the second deploy, the old version was served for about 100 seconds. Wait, then run `build_smoke_test` again.
+- The workflow was added on 6 October, after a platform fix. The app was then wiped and deployed twice with a project key: all 27 starter records were created both times and the workflow ran on a new RSVP.
 - The assistant chose to keep each vote and RSVP as its own record that everyone can read, and to store the member's name on it, so the tally works without extra lookups.
