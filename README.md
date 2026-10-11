@@ -1,5 +1,7 @@
 # supero-mcp
 
+[![smithery badge](https://smithery.ai/badge/supero/supero)](https://smithery.ai/servers/supero/supero)
+
 Build and deploy a real web app from your AI assistant, using [Supero](https://supero.dev) over MCP.
 
 You describe the app. Your assistant (Claude Code, Cursor, VS Code Copilot, or any MCP client) reads the build spec from Supero, writes the app, validates it, and deploys it to a URL you can open. The app gets sign-in, roles, a database, an admin panel and an API from the platform, so the assistant writes the part that is yours and nothing else.
@@ -10,7 +12,7 @@ This repo has three things:
 - **[Project briefs](projects/README.md)**: 31 apps worth building, in 16 verticals, written as requirements. Pick one and build it.
 - **[Community apps](apps/README.md)**: apps people have built, with source. Run one, add your own, or send a fix to someone else's.
 
-The free plan gives you **3 projects** and needs no card, so you can build three of these without paying anything.
+The free plan gives you **3 projects** and needs no card. Deployments on it are 30-minute previews; a URL that stays up is a paid plan.
 
 ## Start here
 
