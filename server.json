@@ -1,0 +1,30 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.supero-platform/supero",
+  "title": "Supero",
+  "description": "Build and deploy multi-tenant apps from ChatGPT, Claude or your editor. Sign in with OAuth or a key.",
+  "repository": {
+    "url": "https://github.com/supero-platform/supero-mcp",
+    "source": "github"
+  },
+  "version": "2.0.2",
+  "websiteUrl": "https://docs.supero.dev/developers/mcp/connect-chatgpt-claude/",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.supero.dev/mcp"
+    },
+    {
+      "type": "streamable-http",
+      "url": "https://api.supero.dev/mcp/v1/messages",
+      "headers": [
+        {
+          "name": "X-API-Key",
+          "isRequired": true,
+          "isSecret": true,
+          "description": "Supero project API key (ak_...). Create one at app.supero.dev under your project's API keys. The key carries its own scope: every tool call is evaluated against the roles attached to it."
+        }
+      ]
+    }
+  ]
+}
