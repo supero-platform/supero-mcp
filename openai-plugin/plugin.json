@@ -1,0 +1,83 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "supero",
+  "version": "1.0.0",
+  "description": "Build, preview and publish web apps with a real backend on Supero from ChatGPT.",
+  "author": {
+    "name": "Supero",
+    "email": "info@supero.dev",
+    "url": "https://supero.dev"
+  },
+  "homepage": "https://supero.dev",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Supero",
+        "shortDescription": "Build apps with a real backend",
+        "longDescription": "Supero builds working web apps from a description: a data model, a REST backend, user sign-up and login, role-based access control and a web interface, deployed to a preview link in minutes.\n\nDescribe the app you want, for example a booking app for a yoga studio with classes, members and bookings. Supero plans it with you, creates a project, builds the backend and the interface, and gives you a preview link with sample data. Keep refining it in the same chat: add fields, change who can see what, redeploy. When it is ready, make it live at a permanent URL, if you allowed publishing when you connected.\n\nYou choose what Supero may do when you connect: one existing project, one new project, or the whole workspace (workspace admins only), and whether it may publish apps. Change or disconnect the connection at any time at app.supero.dev/oauth/connections.\n\nSupero does not move money and does not generate images, video or audio. It reads and writes only your own Supero workspace, under your own permissions.",
+        "developerName": "Supero",
+        "category": "Developer Tools",
+        "websiteURL": "https://supero.dev",
+        "supportURL": "https://supero.dev/contact/",
+        "privacyPolicyURL": "https://supero.dev/privacy",
+        "termsOfServiceURL": "https://supero.dev/terms",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/logo.png"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Shows which Supero workspace, role and project scope the connection has.",
+              "prompt": "Which Supero account and project am I connected to?",
+              "tools_triggered": "build_whoami",
+              "expected_behavior": "Replies with the workspace name, the user's role and what the connection may access (ok: true)."
+            },
+            {
+              "description": "Lists the projects in the reviewer workspace.",
+              "prompt": "List my Supero projects.",
+              "tools_triggered": "build_list_projects",
+              "expected_behavior": "Lists the sample projects in the workspace with their names."
+            },
+            {
+              "description": "Plans a new app before building it.",
+              "prompt": "Plan a small booking app on Supero for a yoga studio: classes with time and capacity, members, and bookings.",
+              "tools_triggered": "build_plan",
+              "expected_behavior": "Returns a build plan: the data objects (classes, members, bookings), their fields, who can do what, and the next build steps."
+            },
+            {
+              "description": "Shows details of a project the connection works in.",
+              "prompt": "Show me the details of my Supero project.",
+              "tools_triggered": "build_list_projects, build_get_project",
+              "expected_behavior": "Returns the project's name, schema namespace, mode (dev) and whether it has a live URL."
+            },
+            {
+              "description": "Explains what Supero can build and connect to.",
+              "prompt": "What can Supero build and which services can it connect to?",
+              "tools_triggered": "build_list_capabilities",
+              "expected_behavior": "Lists Supero's build capabilities and integration services, and the user's own permissions."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Publishing is refused when the user did not allow it at connect time. Expected: the tool returns an error saying the connection can't publish apps, with a link where the user can allow it; nothing goes live.",
+              "prompt": "Make my app live now."
+            },
+            {
+              "description": "A connection limited to one project must not read another project. Expected: refused with 'This connection only covers <project>', plus a link to switch projects; no data from the other project is returned.",
+              "prompt": "Show me the details of my other Supero project."
+            },
+            {
+              "description": "Supero does not move money or generate media. Expected: the assistant declines or answers without calling any Supero tool that would act; no payment is made and no image is created.",
+              "prompt": "Use Supero to send $50 to my supplier and generate a product photo."
+            }
+          ]
+        },
+        "demo_recording_url": "__VIDEO_URL__"
+      },
+      "publication": {
+        "release_notes": "First release of Supero in ChatGPT. Sign in with your Supero account (no API key), choose the project or workspace ChatGPT may use, then build, preview and publish apps with a backend from the chat."
+      }
+    }
+  }
+}
