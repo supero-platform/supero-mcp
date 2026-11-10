@@ -71,7 +71,7 @@ The approval page shows who you are signed in as, your workspace (your Supero do
 | **A new project** | Create one project the first time you ask for an app, then build only in it | Workspace admins |
 | **Whole workspace** | Build in any project and create new ones | Workspace admins, from ChatGPT or Claude (not Claude Code) |
 
-**Let it publish apps** decides whether the assistant may put an app on a permanent public URL. Previews work without it. Leave it off until you are ready to go live; you can reconnect later and tick it.
+**Let it publish apps** decides whether the assistant may put an app on a permanent public URL. Previews work without it. Leave it off until you are ready to go live; you can turn it on later on the connection's page in the console (see [step 8](#8-manage-or-end-the-connection)).
 
 Which to pick:
 
@@ -131,27 +131,26 @@ The assistant gives you the **email and role** of each starter account. It never
 To find or set a password:
 
 - **The seeded password** is in the app's `config.py`, in the `users` list. Ask: "Which line of config.py has the admin's password?" The assistant points you at the line.
-- **Your own password:** open the console link the assistant gives you (**Users** page), add yourself as an admin, then disable the seeded account. **Reset password** on the same page works for any existing user.
-- **"Invalid email or password":** ask the assistant to check the account. It calls `build_check_app_account`, which says whether the account exists, is enabled, and has the role you expect, and gives a console link for the fix.
+- **Your own password:** open the console link the assistant gives you (the app's **Users** page), add yourself as an admin, then disable the seeded account.
+- **"Invalid email or password":** check you used the email from the summary and the password from that `config.py` line. Seeding only creates accounts that are missing, so a password changed in `config.py` after the first deploy does not reach an account that already exists. Add a new admin on the **Users** page instead.
 
 Keys for email, SMS or payments are also entered in the console (the app's **Services** page), never in the chat. The summary lists which ones the app needs.
 
 ## 7. Change it, make it live
 
 - **Change something:** say it in one sentence ("add a notes field only groomers can see"). The assistant fetches the current version, edits it, validates, publishes and deploys. The version number goes up; the URL stays.
-- **What next:** ask "what's left before real users?" and the assistant lists the open items with console links.
 - **Make it live:** ask for a permanent URL. The assistant runs `build_go_live`. This needs:
   1. a paid plan (the free plan is previews only), and
-  2. **Let it publish apps** on this connection. If it is off, the assistant says so; reconnect from your assistant and tick it.
+  2. **Let it publish apps** on this connection. If it is off, the assistant says so and gives you a link to the connection's page, where you tick it.
 - Before real users arrive, follow the "Do now" items in the summary: your own admin account, service keys, and switching the project from dev to live mode.
 
 ## 8. Manage or end the connection
 
 [app.supero.dev/oauth/connections](https://app.supero.dev/oauth/connections) lists every connected assistant.
 
-- **Change** switches between a project and the whole workspace.
-- **Disconnect** ends it. The assistant loses access within seconds and asks you to reconnect the next time.
-- Resetting your Supero password ends all of your connections.
+- **Disconnect** ends it. The assistant loses access right away and asks you to reconnect the next time.
+- **Let it publish apps** can be ticked on the connection's page. Only the person who connected it can turn it on; a workspace admin can turn it off.
+- **Change** (workspace admins, on ChatGPT and Claude connections) switches between a project and the whole workspace.
 - If your role changes and no longer covers what you allowed, the connection ends.
 - Each connection has daily limits on builds and on publishing. When one is reached, the assistant tells you when it resets.
 
@@ -172,12 +171,12 @@ Sign-in connections get the build tools, with these limits:
 |---|---|---|
 | "You're a member in your workspace. Workspace admins can connect assistants…" | Your role cannot grant the access you picked | Ask a workspace admin, or pick a project you administer |
 | "You're in a support session" | You signed in through a session that cannot approve connections | Sign out and sign in with your own account |
-| "This connection can't publish apps" | Publishing was not allowed | Reconnect and tick **Let it publish apps**, or keep using previews |
-| "This connection has already ended" / asked to sign in again | It was disconnected, your password changed, or your role changed | Reconnect. Projects and apps are not affected |
+| "This connection can't publish apps" | Publishing was not allowed | Open the link in the message and tick **Let it publish apps**, or keep using previews |
+| "This connection has already ended" / asked to sign in again | It was disconnected, or your role changed | Reconnect. Projects and apps are not affected |
 | ChatGPT shows a "browser setup URL" message after you changed access | ChatGPT kept the old sign-in | In ChatGPT's connector settings, press **Reconnect** |
 | The assistant cannot create a project | The connection is for an existing project | Reconnect with **A new project** or **Whole workspace**, or create the project in the console |
 | A deploy stays in `launching` | The app is still starting | Wait; up to ten minutes is normal |
-| You cannot sign in to the preview | Wrong account or password | Ask the assistant to run `build_check_app_account` and follow its console link |
+| You cannot sign in to the preview | Wrong account or password | Use the email from the summary and the password in `config.py`, or add a new admin on the app's **Users** page |
 | The Supero window shows an error or does not load | A temporary problem on our side | Try again in a few minutes |
 
 Still stuck? Ask in [Discussions](https://github.com/supero-platform/supero-mcp/discussions).
