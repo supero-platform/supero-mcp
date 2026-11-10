@@ -8,6 +8,8 @@ At each step there is a **You should see** line. If you do not see it, stop and 
 
 You need one of these: [Claude Code](https://claude.com/claude-code), [Cursor](https://cursor.com), or VS Code with GitHub Copilot.
 
+**Using ChatGPT, claude.ai or Claude Desktop?** Do step 1 here, then follow [Build with ChatGPT or Claude](connect-chatgpt-claude.md) instead of steps 2 to 5: you sign in, so there is no key, and you can pick **A new project** on the approval page. Then carry on from step 6.
+
 ## Step 1. Create an account (2 minutes)
 
 1. Go to [supero.dev](https://www.supero.dev/r/github/supero-mcp) and sign up. No card is asked for.

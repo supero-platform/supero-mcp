@@ -1,5 +1,7 @@
 # Connecting a client
 
+**ChatGPT, claude.ai, Claude Desktop or Claude Code?** Sign in instead of using a key: add `https://mcp.supero.dev/mcp` as a connector. Steps are in [Build with ChatGPT or Claude](connect-chatgpt-claude.md). The rest of this page is the key-based setup for editors and scripts.
+
 | | |
 |---|---|
 | Endpoint | `https://api.supero.dev/mcp/v1/messages` |
@@ -59,9 +61,9 @@ If the file is in a repo, add it to `.gitignore` or use an input variable for th
 
 A client works if it can do two things: speak MCP over streamable HTTP, and add a custom header to every request. Point it at the endpoint above and set `X-API-Key`.
 
-## What does not work yet
+## Clients that only sign in
 
-**Claude Desktop and claude.ai custom connectors.** Their "add connector" screen expects the server to offer OAuth, and Supero's server authenticates with a key in a header. Until that changes, use one of the clients above.
+ChatGPT, claude.ai and Claude Desktop cannot send a key header. They connect to `https://mcp.supero.dev/mcp` with OAuth sign-in; see [connect-chatgpt-claude.md](connect-chatgpt-claude.md).
 
 If you get a client working that is not listed here, please send a pull request with the steps.
 

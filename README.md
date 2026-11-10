@@ -4,7 +4,7 @@
 
 Build and deploy a real web app from your AI assistant, using [Supero](https://supero.dev) over MCP.
 
-You describe the app. Your assistant (Claude Code, Cursor, VS Code Copilot, or any MCP client) reads the build spec from Supero, writes the app, validates it, and deploys it to a URL you can open. The app gets sign-in, roles, a database, an admin panel and an API from the platform, so the assistant writes the part that is yours and nothing else.
+You describe the app. Your assistant (ChatGPT, Claude, Claude Code, Cursor, VS Code Copilot, or any MCP client) reads the build spec from Supero, writes the app, validates it, and deploys it to a URL you can open. The app gets sign-in, roles, a database, an admin panel and an API from the platform, so the assistant writes the part that is yours and nothing else.
 
 This repo has three things:
 
@@ -18,6 +18,7 @@ The free plan gives you **3 projects** and needs no card. Deployments on it are 
 
 | If you want to | Go to |
 |---|---|
+| Build from **ChatGPT or Claude** (sign in, no key) | **[Build with ChatGPT or Claude](docs/connect-chatgpt-claude.md)** |
 | Build your first app, with every step spelled out | **[Your first app, step by step](docs/first-app.md)** (30 minutes) |
 | Choose something to build | [Picking a project](docs/pick-a-project.md), then the [project list](projects/README.md) |
 | See a finished example with its source | [Page Turners, a book club app](apps/community/book-club/README.md) |
@@ -25,6 +26,15 @@ The free plan gives you **3 projects** and needs no card. Deployments on it are 
 | Read about a platform feature | [Learn more on docs.supero.dev](docs/learn-more.md) |
 
 The rest of this page is the short version for people who have done this before.
+
+## Two ways to connect
+
+| You use | Connect with | Server URL | Guide |
+|---|---|---|---|
+| ChatGPT, claude.ai, Claude Desktop, Claude Code | **Sign in** (OAuth). No key to copy. | `https://mcp.supero.dev/mcp` | [Build with ChatGPT or Claude](docs/connect-chatgpt-claude.md) |
+| Cursor, VS Code Copilot, scripts, other editors | **API key** in an `X-API-Key` header | `https://api.supero.dev/mcp/v1/messages` | Steps 1 to 3 below, and [connect.md](docs/connect.md) |
+
+Both reach the same build tools. Claude Code works either way; sign-in is simpler.
 
 ## Contents
 
@@ -39,6 +49,8 @@ The rest of this page is the short version for people who have done this before.
 9. [Contribute](#contribute)
 
 ## 1. Get a key
+
+Skip steps 1 to 3 if you connect by signing in: follow [Build with ChatGPT or Claude](docs/connect-chatgpt-claude.md), then go to [step 4](#4-build-an-app).
 
 1. [Create a free Supero account](https://www.supero.dev/r/github/supero-mcp). No card.
 2. In the dashboard, open **Build via MCP**. It is on every project page and in the sidebar.
@@ -96,7 +108,9 @@ Then run `/mcp` inside Claude Code and check that `supero` is connected.
 
 Run **MCP: List Servers**, start `supero`, and use Copilot in Agent mode.
 
-**Anything else.** Any client that speaks MCP over streamable HTTP and lets you set a request header will work. More detail, and the one known gap (Claude Desktop's connector screen wants OAuth, which the server does not offer yet), is in [docs/connect.md](docs/connect.md).
+**ChatGPT, claude.ai and Claude Desktop** do not take a key. They connect by signing in to `https://mcp.supero.dev/mcp`; see [Build with ChatGPT or Claude](docs/connect-chatgpt-claude.md).
+
+**Anything else.** Any client that speaks MCP over streamable HTTP and lets you set a request header will work. More detail is in [docs/connect.md](docs/connect.md).
 
 ## 3. Check the connection
 
@@ -186,6 +200,7 @@ These are the figures on the [pricing page](https://supero.dev/pricing) on 5 Oct
 
 | You see | It means | Do this |
 |---|---|---|
+| ChatGPT or Claude asks for a key or a header | You used the key URL | Use `https://mcp.supero.dev/mcp` and sign in. See [the sign-in guide](docs/connect-chatgpt-claude.md). |
 | `Authentication required` | No key reached the server | Check the header is `X-API-Key` and the client was restarted after you added it. |
 | `401` or `Invalid API key` | The key is wrong, cut short, revoked, or has `Bearer` in front | Paste the raw `ak_...` value. If it is lost, rotate it under **API Keys**. |
 | The assistant cannot create a project | You gave it a project key | Create the project in the dashboard, or use a domain key. |
