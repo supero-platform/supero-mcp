@@ -25,8 +25,8 @@ Editors that want a key in a header (Cursor, VS Code Copilot) still use `https:/
 
 ## 1. Before you start
 
-- **ChatGPT:** a paid plan on chatgpt.com. On Business and Enterprise an admin may have to allow custom connectors first.
-- **Claude:** claude.ai or Claude Desktop. On Team and Enterprise an Owner adds the connector once for the organisation; members then click **Connect**.
+- **ChatGPT:** a plan that allows custom MCP servers. On Business, Enterprise and Edu an admin may have to switch them on first.
+- **Claude:** any plan on claude.ai or Claude Desktop (Free allows one custom connector). On Team and Enterprise an Owner adds the connector once for the organisation; members then click **Connect**.
 - **Claude Code:** the `claude` command-line tool.
 - **Supero:** an account at [app.supero.dev](https://www.supero.dev/r/github/supero-mcp). You can also create one in the sign-in window. The free plan needs no card.
 
@@ -36,20 +36,22 @@ Sign in as yourself. A support or "switch domain" session cannot approve a conne
 
 ### ChatGPT
 
-1. **Settings → Apps & Connectors → Advanced settings**, turn on **Developer mode**.
-2. In **Apps & Connectors**, click **Create**.
+ChatGPT dropped the separate Developer mode switch in October 2026. Button labels still move, so look for the place and the action.
+
+1. Open [chatgpt.com/plugins](https://chatgpt.com/plugins), click **+**, and choose to add a custom MCP server. (Older accounts: **Settings → Apps & Connectors → Create**.)
+2. Fill in:
    - Name: `Supero`
-   - MCP server URL: `https://mcp.supero.dev/mcp`
+   - Connection: **Public endpoint**, URL `https://mcp.supero.dev/mcp`
    - Authentication: **OAuth**
-3. Click **Create**. A Supero window opens. Sign in, [choose the access](#3-choose-the-access), click **Allow**.
-4. In a new chat, turn on **Supero** from the **+** menu. ChatGPT asks you to approve Supero actions the first time each one runs; approve them.
+3. Tick the box that you understand the risk, then create it. A Supero window opens. Sign in, [choose the access](#3-choose-the-access), click **Allow**.
+4. In a new chat, type **@** and pick **Supero** (or turn it on from the **+** menu). ChatGPT asks you to approve Supero actions the first time each one runs; approve them.
 
 ### Claude (claude.ai and Claude Desktop)
 
-1. Open **Settings → Connectors** and click **Add custom connector**. On Team and Enterprise, an Owner does this under **Organization settings → Connectors**.
+1. Open **Customize → Connectors**, click **+ Add**, then **Add custom connector**. On Team and Enterprise, an Owner does this once under **Organization settings → Connectors → Add → Custom → Web**, and members click **Connect**.
 2. Name: `Supero`. URL: `https://mcp.supero.dev/mcp`. Leave the advanced OAuth fields empty. Click **Add**.
 3. Click **Connect**. Sign in to Supero, [choose the access](#3-choose-the-access), click **Allow**.
-4. In a new chat, open the tools menu and make sure **Supero** is on.
+4. In a new chat, click **+ → Connectors** and switch **Supero** on.
 
 ### Claude Code
 
@@ -57,7 +59,7 @@ Sign in as yourself. A support or "switch domain" session cannot approve a conne
 claude mcp add --scope user --transport http supero https://mcp.supero.dev/mcp
 ```
 
-Start `claude`, type `/mcp`, pick `supero`, and choose **Authenticate**. Your browser opens the same sign-in and approval page.
+Start `claude`, type `/mcp`, pick `supero`, and choose **Authenticate**. Your browser opens the same sign-in and approval page (on a remote or headless machine, open the link Claude Code prints).
 
 Claude Code runs on your own computer, so it can be given a new or an existing project, never the whole workspace.
 
