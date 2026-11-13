@@ -4,7 +4,7 @@
 
 Build and deploy a real web app from your AI assistant, using [Supero](https://supero.dev) over MCP.
 
-You describe the app. Your assistant (ChatGPT, Claude, Claude Code, Cursor, VS Code Copilot, or any MCP client) reads the build spec from Supero, writes the app, validates it, and deploys it to a URL you can open. The app gets sign-in, roles, a database, an admin panel and an API from the platform, so the assistant writes the part that is yours and nothing else.
+You describe the app. Your assistant (ChatGPT, Claude, Claude Code, VS Code with Copilot, Cursor, Gemini CLI, Codex CLI, Windsurf, or any MCP client) reads the build spec from Supero, writes the app, validates it, and deploys it to a URL you can open. The app gets sign-in, roles, a database, an admin panel and an API from the platform, so the assistant writes the part that is yours and nothing else.
 
 This repo has three things:
 
@@ -19,6 +19,7 @@ The free plan gives you **3 projects** and needs no card. Deployments on it are 
 | If you want to | Go to |
 |---|---|
 | Build from **ChatGPT or Claude** (sign in, no key) | **[Build with ChatGPT or Claude](docs/connect-chatgpt-claude.md)** |
+| Build from **VS Code, Cursor, Gemini CLI, Codex CLI or Windsurf** (sign in, no key) | **[Connect your editor or CLI](docs/connect-editors.md)** |
 | Build your first app, with every step spelled out | **[Your first app, step by step](docs/first-app.md)** (30 minutes) |
 | Choose something to build | [Picking a project](docs/pick-a-project.md), then the [project list](projects/README.md) |
 | See a finished example with its source | [Page Turners, a book club app](apps/community/book-club/README.md) |
@@ -32,9 +33,10 @@ The rest of this page is the short version for people who have done this before.
 | You use | Connect with | Server URL | Guide |
 |---|---|---|---|
 | ChatGPT, claude.ai, Claude Desktop, Claude Code | **Sign in** (OAuth). No key to copy. | `https://mcp.supero.dev/mcp` | [Build with ChatGPT or Claude](docs/connect-chatgpt-claude.md) |
-| Cursor, VS Code Copilot, scripts, other editors | **API key** in an `X-API-Key` header | `https://api.supero.dev/mcp/v1/messages` | Steps 1 to 3 below, and [connect.md](docs/connect.md) |
+| VS Code (GitHub Copilot), Cursor, Gemini CLI, Codex CLI, Windsurf | **Sign in** (OAuth). No key to copy. | `https://mcp.supero.dev/mcp` | [Connect your editor or CLI](docs/connect-editors.md) |
+| Scripts, CI, machines with no browser, other clients | **API key** in an `X-API-Key` header | `https://api.supero.dev/mcp/v1/messages` | Steps 1 to 3 below, and [connect.md](docs/connect.md) |
 
-Both reach the same build tools. Claude Code works either way; sign-in is simpler.
+Both reach the same build tools. Every editor above also works with a key; sign-in is simpler. A few tools (outside data sources, changing or deleting saved schemas, replacing a whole project) are offered only with a key: [tools.md](docs/tools.md) marks them.
 
 ## Contents
 
@@ -50,7 +52,7 @@ Both reach the same build tools. Claude Code works either way; sign-in is simple
 
 ## 1. Get a key
 
-Skip steps 1 to 3 if you connect by signing in: follow [Build with ChatGPT or Claude](docs/connect-chatgpt-claude.md), then go to [step 4](#4-build-an-app).
+Skip steps 1 to 3 if you connect by signing in: follow [Build with ChatGPT or Claude](docs/connect-chatgpt-claude.md) or [Connect your editor or CLI](docs/connect-editors.md), then go to [step 4](#4-build-an-app).
 
 1. [Create a free Supero account](https://www.supero.dev/r/github/supero-mcp). No card.
 2. In the dashboard, open **Build via MCP**. It is on every project page and in the sidebar.
@@ -66,6 +68,8 @@ The key starts with `ak_` and is shown **once**. Copy it then. If you lose it, r
 Treat the key like a password. Do not commit it, and do not paste it into an issue or an app folder.
 
 ## 2. Connect your assistant
+
+This section is the API-key setup. To sign in instead (no key), use `https://mcp.supero.dev/mcp`: [editors and CLIs](docs/connect-editors.md), [ChatGPT and Claude](docs/connect-chatgpt-claude.md).
 
 The server is at `https://api.supero.dev/mcp/v1/messages` (streamable HTTP). Send the key in an `X-API-Key` header, raw, with no `Bearer` in front.
 
@@ -109,6 +113,8 @@ Then run `/mcp` inside Claude Code and check that `supero` is connected.
 Run **MCP: List Servers**, start `supero`, and use Copilot in Agent mode.
 
 **ChatGPT, claude.ai and Claude Desktop** do not take a key. They connect by signing in to `https://mcp.supero.dev/mcp`; see [Build with ChatGPT or Claude](docs/connect-chatgpt-claude.md).
+
+**Gemini CLI, Codex CLI and Windsurf** take a key too; the config for each is in [docs/connect-editors.md](docs/connect-editors.md).
 
 **Anything else.** Any client that speaks MCP over streamable HTTP and lets you set a request header will work. More detail is in [docs/connect.md](docs/connect.md).
 
@@ -172,7 +178,7 @@ More prompts, for changing an app, fixing a failed deploy and going live, are in
 
 A deploy usually takes a few minutes and can sit in `launching` for five or more. That is normal: the assistant should keep polling `build_deploy_status` for up to ten minutes before deciding something is wrong.
 
-The full walk-through is in [docs/build-flow.md](docs/build-flow.md), and every tool is listed in [docs/tools.md](docs/tools.md) (64 tools; you can list them without a key).
+The full walk-through is in [docs/build-flow.md](docs/build-flow.md), and every tool is listed in [docs/tools.md](docs/tools.md) (68 tools with a key, about 50 when you sign in; you can list them without a key).
 
 **What you do not have to build.** Sign-in, roles and permissions, per-record and per-field access rules, the database, the REST API, the admin panel, and data kept apart between organisations in a multi-tenant app. There are also ready-made services to switch on instead of writing: bookings, appointments, rentals, cart, orders, payments, approvals, tasks, tickets, reviews, memberships, recurring plans, inventory, document signature, attachments, notifications, email and more. Ask the assistant to call `build_list_capabilities` to see them all.
 

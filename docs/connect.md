@@ -1,6 +1,6 @@
 # Connecting a client
 
-**ChatGPT, claude.ai, Claude Desktop or Claude Code?** Sign in instead of using a key: add `https://mcp.supero.dev/mcp` as a connector. Steps are in [Build with ChatGPT or Claude](connect-chatgpt-claude.md). The rest of this page is the key-based setup for editors and scripts.
+**Most assistants can sign in instead of using a key**, with `https://mcp.supero.dev/mcp`: ChatGPT, claude.ai, Claude Desktop and Claude Code ([steps](connect-chatgpt-claude.md)), and VS Code, Cursor, Gemini CLI, Codex CLI and Windsurf ([steps](connect-editors.md)). The rest of this page is the key-based setup for scripts, CI and clients that can't sign in. The key versions of the Gemini CLI, Codex CLI and Windsurf configs are in [connect-editors.md](connect-editors.md).
 
 | | |
 |---|---|

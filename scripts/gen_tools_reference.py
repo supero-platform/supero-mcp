@@ -5,6 +5,11 @@ Needs no API key: tools/list answers an anonymous caller. Run it whenever the
 server gains or changes a tool, and commit the result.
 
     python3 scripts/gen_tools_reference.py
+
+The sign-in endpoint (https://mcp.supero.dev/mcp) offers a subset of the tools. Which ones is
+recorded in scripts/signin_tools.json. To refresh that file, pass a sign-in access token:
+
+    SUPERO_MCP_BEARER=<access token> python3 scripts/gen_tools_reference.py
 """
 import json
 import os
@@ -12,7 +17,13 @@ import sys
 import urllib.request
 
 ENDPOINT = os.environ.get("SUPERO_MCP_URL", "https://api.supero.dev/mcp/v1/messages")
-OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "docs", "tools.md")
+SIGNIN_ENDPOINT = os.environ.get("SUPERO_MCP_SIGNIN_URL", "https://mcp.supero.dev/mcp")
+HERE = os.path.dirname(os.path.abspath(__file__))
+OUT = os.path.join(HERE, "..", "docs", "tools.md")
+SIGNIN_LIST = os.path.join(HERE, "signin_tools.json")
+# Tools the sign-in endpoint lists only when the connection covers the whole workspace (not one
+# project). signin_tools.json is taken from a one-project connection, so it never contains these.
+WORKSPACE_ONLY = {"build_stage_bundle"}
 
 # Family -> (order, one-line purpose). Order is the order a build session meets them.
 FAMILIES = {
@@ -27,13 +38,17 @@ FAMILIES = {
 }
 
 
-def fetch_tools():
+def fetch_tools(endpoint=ENDPOINT, bearer=None):
     body = json.dumps({"jsonrpc": "2.0", "id": 1, "method": "tools/list", "params": {}}).encode()
-    req = urllib.request.Request(ENDPOINT, data=body, method="POST", headers={
+    headers = {
         "Content-Type": "application/json",
         "Accept": "application/json, text/event-stream",
         "User-Agent": "supero-mcp-tools-reference/1.0",
-    })
+    }
+    if bearer:
+        headers["Authorization"] = "Bearer " + bearer
+        headers["MCP-Protocol-Version"] = "2025-06-18"
+    req = urllib.request.Request(endpoint, data=body, method="POST", headers=headers)
     raw = urllib.request.urlopen(req, timeout=60).read().decode()
     if raw.lstrip().startswith(("event:", "data:")):
         raw = "\n".join(l[5:].strip() for l in raw.splitlines() if l.startswith("data:"))
@@ -57,8 +72,22 @@ def args_cell(schema):
     return ", ".join(("**`%s`**" if name in required else "`%s`") % name for name in props)
 
 
+def signin_names():
+    bearer = os.environ.get("SUPERO_MCP_BEARER")
+    if bearer:
+        names = sorted(t["name"] for t in fetch_tools(SIGNIN_ENDPOINT, bearer))
+        with open(SIGNIN_LIST, "w") as fh:
+            json.dump(names, fh, indent=1)
+            fh.write("\n")
+    with open(SIGNIN_LIST) as fh:
+        return set(json.load(fh))
+
+
 def main():
     tools = fetch_tools()
+    signin = signin_names()
+    key_only = [t["name"] for t in tools if t["name"] not in signin and t["name"] not in WORKSPACE_ONLY]
+    ws_only = [t["name"] for t in tools if t["name"] in WORKSPACE_ONLY]
     groups = {}
     for tool in tools:
         groups.setdefault(tool["name"].split("_")[0], []).append(tool)
@@ -73,6 +102,13 @@ def main():
         "**%d tools.** Required arguments are in bold. Your agent reads the full" % len(tools),
         "argument schemas itself when it connects; this page is the map for people.",
         "",
+        "**Sign-in vs API key.** With an API key (`https://api.supero.dev/mcp/v1/messages`) you get",
+        "every tool below. When you sign in (`https://mcp.supero.dev/mcp`), the %d marked *key only*" % len(key_only),
+        "are not offered: they connect outside data sources, change or delete saved schemas, or",
+        "replace a whole project. Use an API key for those. %s is offered only when the" % ", ".join("`%s`" % n for n in ws_only),
+        "connection covers the whole workspace; on a one-project connection, pass the files to",
+        "`build_publish` directly.",
+        "",
         "| Family | Tools | What it is for |",
         "|---|---|---|",
     ]
@@ -80,13 +116,15 @@ def main():
     for fam in ordered:
         out.append("| [`%s_`](#%s) | %d | %s |" % (fam, fam, len(groups[fam]), FAMILIES.get(fam, (99, ""))[1]))
     for fam in ordered:
-        out += ["", "## %s" % fam, "", "| Tool | Arguments | What it does |", "|---|---|---|"]
+        out += ["", "## %s" % fam, "", "| Tool | Sign-in | Arguments | What it does |", "|---|---|---|---|"]
         for tool in groups[fam]:
             desc = first_sentence(tool.get("description", "")).replace("|", "\\|")
-            out.append("| `%s` | %s | %s |" % (tool["name"], args_cell(tool.get("inputSchema")), desc))
+            where = ("whole workspace" if tool["name"] in WORKSPACE_ONLY
+                     else "yes" if tool["name"] in signin else "*key only*")
+            out.append("| `%s` | %s | %s | %s |" % (tool["name"], where, args_cell(tool.get("inputSchema")), desc))
     with open(OUT, "w") as fh:
         fh.write("\n".join(out) + "\n")
-    print("wrote %s: %d tools in %d families" % (os.path.relpath(OUT), len(tools), len(groups)))
+    print("wrote %s: %d tools in %d families, %d key only" % (os.path.relpath(OUT), len(tools), len(groups), len(key_only)))
 
 
 if __name__ == "__main__":
