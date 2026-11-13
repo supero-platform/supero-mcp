@@ -174,7 +174,7 @@ Sign-in connections get the build tools, with these limits:
 | "You're a member in your workspace. Workspace admins can connect assistants…" | Your role cannot grant the access you picked | Ask a workspace admin, or pick a project you administer |
 | "You're in a support session" | You signed in through a session that cannot approve connections | Sign out and sign in with your own account |
 | "This connection can't publish apps" | Publishing was not allowed | Open the link in the message and tick **Let it publish apps**, or keep using previews |
-| "This connection has already ended" / asked to sign in again | It was disconnected, or your role changed | Reconnect. Projects and apps are not affected |
+| "This connection has already ended" / asked to sign in again | It was disconnected, your role changed, or you changed your Supero password or email (that ends every connection you signed in) | Reconnect. Projects and apps are not affected |
 | ChatGPT shows a "browser setup URL" message after you changed access | ChatGPT kept the old sign-in | In ChatGPT's connector settings, press **Reconnect** |
 | The assistant cannot create a project | The connection is for an existing project | Reconnect with **A new project** or **Whole workspace**, or create the project in the console |
 | A deploy stays in `launching` | The app is still starting | Wait; up to ten minutes is normal |

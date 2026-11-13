@@ -254,6 +254,7 @@ What happens next is in [build-flow.md](build-flow.md) and [first-app.md](first-
 - "Too many registrations" (HTTP 429). Each new sign-in registers the tool with Supero. One IP address may register 10 times an hour (an IPv6 /64 network 20 times), and there is an overall hourly limit. Wait, then try again. A sign-in that already works is not affected.
 - Signed in as the wrong account: remove the server, add it again, and use Switch account on the approval page.
 - To disconnect, use Disconnect at [app.supero.dev/oauth/connections](https://app.supero.dev/oauth/connections), then remove the server from the tool's config.
+- Changing your Supero password or email ends every assistant connection you signed in. Your projects and apps are not affected; sign in again from the tool.
 - A tool you expected is missing: it may be offered only with an API key. See [tools.md](tools.md).
 
 Got another MCP client working? Send a pull request with its steps.
