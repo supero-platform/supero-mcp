@@ -1,8 +1,10 @@
-# supero-mcp
+# Supero MCP server
 
-[![smithery badge](https://smithery.ai/badge/supero/supero)](https://smithery.ai/servers/supero/supero)
+[![Glama MCP connector](https://glama.ai/mcp/connectors/io.github.supero-platform/supero/badges/score.svg)](https://glama.ai/mcp/connectors/io.github.supero-platform/supero)
 
-Build and deploy a real web app from your AI assistant, using [Supero](https://supero.dev) over MCP.
+[Supero](https://supero.dev) is a platform for multi-tenant web apps: sign-in, roles, a database, an admin panel and an API come with every app. This is its remote MCP server. Connect your AI assistant to `https://mcp.supero.dev/mcp` (Streamable HTTP, OAuth sign-in, no API key) and it can plan an app, write it, validate it and deploy it to a URL you can open.
+
+In Claude Code, install the [Supero plugin](https://github.com/supero-platform/supero-claude-plugin): `/plugin marketplace add supero-platform/supero-claude-plugin`, then `/plugin install supero@supero`, then `/mcp` to sign in. For CI and scripts there is an API-key endpoint, `https://api.supero.dev/mcp/v1/messages`. The server is in the official MCP Registry as `io.github.supero-platform/supero`.
 
 You describe the app. Your assistant (ChatGPT, Claude, Claude Code, VS Code with Copilot, Cursor, Gemini CLI, Codex CLI, Windsurf, or any MCP client) reads the build spec from Supero, writes the app, validates it, and deploys it to a URL you can open. The app gets sign-in, roles, a database, an admin panel and an API from the platform, so the assistant writes the part that is yours and nothing else.
 
@@ -178,7 +180,7 @@ More prompts, for changing an app, fixing a failed deploy and going live, are in
 
 A deploy usually takes a few minutes and can sit in `launching` for five or more. That is normal: the assistant should keep polling `build_deploy_status` for up to ten minutes before deciding something is wrong.
 
-The full walk-through is in [docs/build-flow.md](docs/build-flow.md), and every tool is listed in [docs/tools.md](docs/tools.md) (68 tools with a key, about 50 when you sign in; you can list them without a key).
+The full walk-through is in [docs/build-flow.md](docs/build-flow.md), and every tool is listed in [docs/tools.md](docs/tools.md) (69 tools with a key, about 50 when you sign in; you can list them without a key).
 
 **What you do not have to build.** Sign-in, roles and permissions, per-record and per-field access rules, the database, the REST API, the admin panel, and data kept apart between organisations in a multi-tenant app. There are also ready-made services to switch on instead of writing: bookings, appointments, rentals, cart, orders, payments, approvals, tasks, tickets, reviews, memberships, recurring plans, inventory, document signature, attachments, notifications, email and more. Ask the assistant to call `build_list_capabilities` to see them all.
 

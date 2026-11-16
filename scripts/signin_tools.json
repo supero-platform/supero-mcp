@@ -24,6 +24,7 @@
  "build_plan",
  "build_publish",
  "build_recommend_integrations",
+ "build_report",
  "build_set_project_mode",
  "build_smoke_test",
  "build_teardown",
