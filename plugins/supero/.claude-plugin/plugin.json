@@ -1,0 +1,27 @@
+{
+  "name": "supero",
+  "displayName": "Supero",
+  "version": "1.1.0",
+  "description": "Supero MCP server plus build skills: multi-tenant backend with auth, RBAC, data, workflows and deploy. Connects to https://mcp.supero.dev/mcp?features=core, where you sign in with your Supero account (no API key).",
+  "author": {
+    "name": "Supero",
+    "email": "info@supero.dev",
+    "url": "https://supero.dev"
+  },
+  "homepage": "https://supero.dev/?ref=claude-plugin",
+  "repository": "https://github.com/supero-platform/supero-mcp",
+  "license": "MIT",
+  "keywords": [
+    "supero",
+    "mcp",
+    "app-builder",
+    "backend",
+    "deploy",
+    "multi-tenant"
+  ],
+  "icon": "./icon.png",
+  "documentationUrl": "https://github.com/supero-platform/supero-mcp/blob/main/guidance/build.md",
+  "supportUrl": "https://github.com/supero-platform/supero-mcp/issues",
+  "privacyPolicyUrl": "https://supero.dev/privacy",
+  "termsOfServiceUrl": "https://supero.dev/terms"
+}

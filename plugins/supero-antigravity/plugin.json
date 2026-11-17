@@ -1,0 +1,21 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "supero",
+  "displayName": "Supero",
+  "version": "1.1.0",
+  "description": "Multi-tenant backend your coding agent configures over MCP: auth, RBAC, data, workflows, deploy.",
+  "logo": "assets/icon.png",
+  "author": {
+    "name": "Supero",
+    "url": "https://supero.dev"
+  },
+  "homepage": "https://supero.dev/?ref=antigravity",
+  "repository": "https://github.com/supero-platform/supero-mcp",
+  "license": "MIT",
+  "keywords": ["supero", "mcp", "backend", "multi-tenant", "rbac", "deploy"],
+  "suggestedPrompts": [
+    "Which Supero account and project am I connected to?",
+    "Build a helpdesk on Supero where each customer company sees only its own tickets",
+    "Add a priority field to tickets in my Supero app and redeploy"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "supero",
+  "owner": {
+    "name": "Supero",
+    "email": "info@supero.dev"
+  },
+  "metadata": {
+    "description": "Supero plugin for Cursor: the Supero MCP server, a build rule and the supero-build skill."
+  },
+  "plugins": [
+    {
+      "name": "supero",
+      "source": "./plugins/supero",
+      "description": "Multi-tenant backend your coding agent configures over MCP: auth, RBAC, data, workflows, deploy."
+    }
+  ]
+}

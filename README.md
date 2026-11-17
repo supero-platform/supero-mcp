@@ -1,243 +1,152 @@
-# Supero MCP server
+# Supero: the multi-tenant backend your coding agent configures over MCP
 
 [![Glama MCP connector](https://glama.ai/mcp/connectors/io.github.supero-platform/supero/badges/score.svg)](https://glama.ai/mcp/connectors/io.github.supero-platform/supero)
 
-[Supero](https://supero.dev) is a platform for multi-tenant web apps: sign-in, roles, a database, an admin panel and an API come with every app. This is its remote MCP server. Connect your AI assistant to `https://mcp.supero.dev/mcp` (Streamable HTTP, OAuth sign-in, no API key) and it can plan an app, write it, validate it and deploy it to a URL you can open.
+Your agent writes the UI. [Supero](https://supero.dev/?ref=github) provides the rest: sign-in, tenants, roles and permissions, data on Supero's database or yours, workflows, and deployment to Supero Cloud or your own AWS. This repo holds the remote MCP server's install files, build guidance and examples.
 
-In Claude Code, install the [Supero plugin](https://github.com/supero-platform/supero-claude-plugin): `/plugin marketplace add supero-platform/supero-claude-plugin`, then `/plugin install supero@supero`, then `/mcp` to sign in. For CI and scripts there is an API-key endpoint, `https://api.supero.dev/mcp/v1/messages`. The server is in the official MCP Registry as `io.github.supero-platform/supero`.
+The server is `https://mcp.supero.dev/mcp` (Streamable HTTP). You sign in with your Supero account through OAuth, so there is no API key to copy. New installs use `https://mcp.supero.dev/mcp?features=core`, which offers the tools a first build needs; [Tools](#tools) explains how to add more. The server is in the official MCP Registry as `io.github.supero-platform/supero`.
 
-You describe the app. Your assistant (ChatGPT, Claude, Claude Code, VS Code with Copilot, Cursor, Gemini CLI, Codex CLI, Windsurf, or any MCP client) reads the build spec from Supero, writes the app, validates it, and deploys it to a URL you can open. The app gets sign-in, roles, a database, an admin panel and an API from the platform, so the assistant writes the part that is yours and nothing else.
+## What Supero handles
 
-This repo has three things:
+You describe an app. Your assistant reads the build spec from Supero, plans the app with you, writes a small bundle (the data model, the configuration and the front end), validates it, and deploys it to a URL you can open. The platform supplies:
 
-- **This guide**: how to connect and build, start to finish.
-- **[Project briefs](projects/README.md)**: 31 apps worth building, in 16 verticals, written as requirements. Pick one and build it.
-- **[Community apps](apps/README.md)**: apps people have built, with source. Run one, add your own, or send a fix to someone else's.
+- sign-in and sign-up, with each customer organisation kept apart from the others;
+- roles, permissions, and per-record and per-field access rules;
+- the database, the REST API and an admin panel;
+- workflows, email and notifications;
+- ready-made services: bookings, appointments, rentals, cart, orders, payments, approvals, tasks, tickets, reviews, memberships, recurring plans, inventory, document signature and attachments;
+- previews, permanent URLs on `supero.live`, and deployment to your own cloud.
 
-The free plan gives you **3 projects** and needs no card. Deployments on it are 30-minute previews; a URL that stays up is a paid plan.
+## Install
 
-## Start here
+Every option below signs in through your browser. The links, the Cursor, Gemini and Antigravity installs, and the `claude mcp add` command connect to `https://mcp.supero.dev/mcp?features=core`. The Claude Code plugin connects to `https://mcp.supero.dev/mcp`, which has every tool.
 
-| If you want to | Go to |
-|---|---|
-| Build from **ChatGPT or Claude** (sign in, no key) | **[Build with ChatGPT or Claude](docs/connect-chatgpt-claude.md)** |
-| Build from **VS Code, Cursor, Gemini CLI, Codex CLI or Windsurf** (sign in, no key) | **[Connect your editor or CLI](docs/connect-editors.md)** |
-| Build your first app, with every step spelled out | **[Your first app, step by step](docs/first-app.md)** (30 minutes) |
-| Choose something to build | [Picking a project](docs/pick-a-project.md), then the [project list](projects/README.md) |
-| See a finished example with its source | [Page Turners, a book club app](apps/community/book-club/README.md) |
-| Fix something in an app that exists | [Community apps](apps/README.md#improve-someone-elses) |
-| Read about a platform feature | [Learn more on docs.supero.dev](docs/learn-more.md) |
+**Claude Code plugin** (the server plus the `supero-build` skill). Inside Claude Code:
 
-The rest of this page is the short version for people who have done this before.
+```text
+/plugin marketplace add supero-platform/supero-mcp
+/plugin install supero@supero
+```
 
-## Two ways to connect
+Then run `/mcp`, select `supero` and authenticate. The earlier marketplace, `supero-platform/supero-claude-plugin`, installs the same plugin.
 
-| You use | Connect with | Server URL | Guide |
-|---|---|---|---|
-| ChatGPT, claude.ai, Claude Desktop, Claude Code | **Sign in** (OAuth). No key to copy. | `https://mcp.supero.dev/mcp` | [Build with ChatGPT or Claude](docs/connect-chatgpt-claude.md) |
-| VS Code (GitHub Copilot), Cursor, Gemini CLI, Codex CLI, Windsurf | **Sign in** (OAuth). No key to copy. | `https://mcp.supero.dev/mcp` | [Connect your editor or CLI](docs/connect-editors.md) |
-| Scripts, CI, machines with no browser, other clients | **API key** in an `X-API-Key` header | `https://api.supero.dev/mcp/v1/messages` | Steps 1 to 3 below, and [connect.md](docs/connect.md) |
-
-Both reach the same build tools. Every editor above also works with a key; sign-in is simpler. A few tools (outside data sources, changing or deleting saved schemas, replacing a whole project) are offered only with a key: [tools.md](docs/tools.md) marks them.
-
-## Contents
-
-1. [Get a key](#1-get-a-key)
-2. [Connect your assistant](#2-connect-your-assistant)
-3. [Check the connection](#3-check-the-connection)
-4. [Build an app](#4-build-an-app)
-5. [What the assistant does](#5-what-the-assistant-does)
-6. [Change it and ship it](#6-change-it-and-ship-it)
-7. [Free plan limits](#free-plan-limits)
-8. [When something goes wrong](#when-something-goes-wrong)
-9. [Contribute](#contribute)
-
-## 1. Get a key
-
-Skip steps 1 to 3 if you connect by signing in: follow [Build with ChatGPT or Claude](docs/connect-chatgpt-claude.md) or [Connect your editor or CLI](docs/connect-editors.md), then go to [step 4](#4-build-an-app).
-
-1. [Create a free Supero account](https://www.supero.dev/r/github/supero-mcp). No card.
-2. In the dashboard, open **Build via MCP**. It is on every project page and in the sidebar.
-3. Create a key. There are two kinds:
-
-| Key | What the assistant can do with it | Use it when |
-|---|---|---|
-| **Project key** | Build into one project, and only that one | You have made a project in the dashboard and want the app there. This is the safer default. |
-| **Domain key** | Create new projects and build into them | You want the assistant to create the project too. Needs a domain admin. |
-
-The key starts with `ak_` and is shown **once**. Copy it then. If you lose it, rotate it under **API Keys** to get a new one.
-
-Treat the key like a password. Do not commit it, and do not paste it into an issue or an app folder.
-
-## 2. Connect your assistant
-
-This section is the API-key setup. To sign in instead (no key), use `https://mcp.supero.dev/mcp`: [editors and CLIs](docs/connect-editors.md), [ChatGPT and Claude](docs/connect-chatgpt-claude.md).
-
-The server is at `https://api.supero.dev/mcp/v1/messages` (streamable HTTP). Send the key in an `X-API-Key` header, raw, with no `Bearer` in front.
-
-**Claude Code**
+**Claude Code without the plugin:**
 
 ```bash
-claude mcp add --transport http supero \
-  https://api.supero.dev/mcp/v1/messages \
-  --header "X-API-Key: ak_..."
+claude mcp add --transport http --scope user supero "https://mcp.supero.dev/mcp?features=core"
 ```
 
-Then run `/mcp` inside Claude Code and check that `supero` is connected.
+Use either the plugin or this command, not both, or the tools appear twice.
 
-**Cursor**: `~/.cursor/mcp.json`
+**Cursor:** [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=supero&config=eyJ1cmwiOiJodHRwczovL21jcC5zdXBlcm8uZGV2L21jcD9mZWF0dXJlcz1jb3JlIn0=)
 
-```json
-{
-  "mcpServers": {
-    "supero": {
-      "url": "https://api.supero.dev/mcp/v1/messages",
-      "headers": { "X-API-Key": "ak_..." }
-    }
-  }
-}
-```
+The direct link is `cursor://anysphere.cursor-deeplink/mcp/install?name=supero&config=eyJ1cmwiOiJodHRwczovL21jcC5zdXBlcm8uZGV2L21jcD9mZWF0dXJlcz1jb3JlIn0=`. The repo also has a Cursor plugin in [`plugins/supero`](plugins/supero) with the server, a rule and the skill.
 
-**VS Code (GitHub Copilot)**: `.vscode/mcp.json`
+**VS Code (GitHub Copilot):** [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_Supero-0098FF?logo=visualstudiocode&logoColor=white)](https://vscode.dev/redirect?url=vscode%3Amcp%2Finstall%3F%257B%2522name%2522%253A%2522supero%2522%252C%2522type%2522%253A%2522http%2522%252C%2522url%2522%253A%2522https%253A%252F%252Fmcp.supero.dev%252Fmcp%253Ffeatures%253Dcore%2522%257D)
 
-```json
-{
-  "servers": {
-    "supero": {
-      "type": "http",
-      "url": "https://api.supero.dev/mcp/v1/messages",
-      "headers": { "X-API-Key": "ak_..." }
-    }
-  }
-}
-```
+Or open `vscode:mcp/install?%7B%22name%22%3A%22supero%22%2C%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fmcp.supero.dev%2Fmcp%3Ffeatures%3Dcore%22%7D`. Start the server from **MCP: List Servers** and use Copilot in Agent mode.
 
-Run **MCP: List Servers**, start `supero`, and use Copilot in Agent mode.
-
-**ChatGPT, claude.ai and Claude Desktop** do not take a key. They connect by signing in to `https://mcp.supero.dev/mcp`; see [Build with ChatGPT or Claude](docs/connect-chatgpt-claude.md).
-
-**Gemini CLI, Codex CLI and Windsurf** take a key too; the config for each is in [docs/connect-editors.md](docs/connect-editors.md).
-
-**Anything else.** Any client that speaks MCP over streamable HTTP and lets you set a request header will work. More detail is in [docs/connect.md](docs/connect.md).
-
-## 3. Check the connection
-
-Ask your assistant:
-
-```text
-Call build_whoami on Supero and tell me what it says.
-```
-
-You should get back your role, your domain and, for a project key, the project it is bound to. If you would rather check from a terminal:
+**Gemini CLI:**
 
 ```bash
-curl -s https://api.supero.dev/mcp/v1/messages \
-  -H "Content-Type: application/json" \
-  -H "X-API-Key: ak_..." \
-  -d '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"build_whoami","arguments":{}}}'
+gemini extensions install https://github.com/supero-platform/supero-mcp
 ```
 
-## 4. Build an app
+Then run `/mcp auth supero` inside Gemini CLI. The extension adds the server and [GEMINI.md](GEMINI.md) as context.
 
-Paste this, with your own description in the middle.
+**Antigravity:** clone this repo and install the plugin folder:
 
-**With a project key** (the project already exists):
+```bash
+git clone https://github.com/supero-platform/supero-mcp
+agy plugin install ./supero-mcp/plugins/supero-antigravity
+```
+
+It signs in when the server first connects.
+
+**ChatGPT, claude.ai and Claude Desktop:** add `https://mcp.supero.dev/mcp` as a custom connector. The steps are in [Build with ChatGPT or Claude](docs/connect-chatgpt-claude.md).
+
+**Codex CLI, Windsurf and other clients:** see [Connect your editor or CLI](docs/connect-editors.md). [AGENTS.md](AGENTS.md) has the build guidance in the form Codex and other `AGENTS.md` readers use; copy it into your project.
+
+**Scripts and CI** with no browser use an API key at `https://api.supero.dev/mcp/v1/messages`, sent raw in an `X-API-Key` header. Create the key in the dashboard under **Build via MCP**. The setup is in [docs/connect.md](docs/connect.md).
+
+## Try it
+
+Paste one of these after you connect:
 
 ```text
-Connect to Supero over MCP and use your build_ tools. Everything runs through MCP: don't look for a local supero CLI or a SKILLS.md file on disk, there isn't one.
-
-Build this app in my project: [describe your app: the main thing users do, the key screens, and an admin view].
-
-Work in this order: build_whoami, then build_get_skills to load the spec, then build_plan. Echo the plan back to me and wait for my go-ahead. Then build_get_examples with the closest archetype as your reference, author the bundle, run build_validate and fix everything it reports, run build_doctor and fix its warnings, then build_publish and deploy (build_deploy for a ~30-minute preview, build_go_live for the permanent URL). Finally build_smoke_test the deployed URL and finish with a short summary: what you built, the URL, and how I log in.
+Which Supero account and project am I connected to?
 ```
-
-**With a domain key**, change the second paragraph to:
 
 ```text
-Create a new project with build_create_project (pick a short name and namespace), then build this app in it: [describe your app].
+Build a helpdesk on Supero. Customers belong to a company and open tickets; agents answer them; an admin manages agents. A customer sees only their own company's tickets, and agents see every company's. Plan it first and show me the plan before you build. Then validate, publish, deploy a preview and verify it, and tell me the URL and how to sign in.
 ```
-
-Stuck for an idea? Every [project brief](projects/README.md) ends with a prompt that is ready to paste.
-
-If the assistant starts searching your disk for a CLI, send it this:
 
 ```text
-Stop reading the local filesystem. There is no CLI and no SKILLS.md. Call build_get_skills over MCP now, author the bundle, then build_validate.
+In my Supero app, add a priority field (low, normal, high) to tickets and show it in the ticket list. Change nothing else. Validate, publish and redeploy, then tell me the new version and URL.
 ```
 
-More prompts, for changing an app, fixing a failed deploy and going live, are in [docs/prompts.md](docs/prompts.md).
+The free plan has 3 projects and needs no card. Deployments on it are 30-minute previews; a permanent URL is a paid plan. Current figures are on the [pricing page](https://supero.dev/pricing) and in [docs/limits.md](docs/limits.md).
 
-## 5. What the assistant does
+How a build runs, step by step, is in [guidance/build.md](guidance/build.md), the same guidance every client above receives. [Your first app, step by step](docs/first-app.md) walks through one in 30 minutes, and [docs/prompts.md](docs/prompts.md) has more prompts.
 
-| Step | Tools | What happens |
+## Examples
+
+- [supero-apps](https://github.com/supero-platform/supero-apps): complete reference apps with source and live demos.
+- [Project briefs](projects/README.md): 31 apps worth building, in 16 verticals, written as requirements. Each ends with a prompt to paste. [Picking a project](docs/pick-a-project.md) helps you choose.
+- [Community apps](apps/README.md): apps people have built, with source, such as [Page Turners, a book club app](apps/community/book-club/README.md).
+
+## Tools
+
+<!-- tools:start (generated by scripts/gen-guidance from docs/tool-groups.json) -->
+
+A connection to `https://mcp.supero.dev/mcp?features=core` has the 21 core tools:
+
+`build_whoami`, `build_list_projects`, `build_get_project`, `build_create_project`, `build_plan`, `build_get_skills`, `build_next_steps`, `schema_list`, `schema_get`, `schema_save`, `schema_validate`, `crud_search`, `crud_get`, `crud_create`, `crud_update`, `build_validate`, `build_publish`, `build_get_bundle`, `build_deploy`, `build_deploy_status`, `build_verify`.
+
+Other tools come in groups. Add a group to the URL to get its tools, for example `https://mcp.supero.dev/mcp?features=core,services`, or use `features=all` for every tool. Without `features` the server offers every tool, as it always has.
+
+| Group | What it adds | Tools |
 |---|---|---|
-| 1. Orient | `build_whoami` | Finds out which project it may build into and what the key allows. |
-| 2. Learn | `build_get_skills`, `build_get_examples`, `build_get_service_contract` | Reads the build spec, a working reference app, and the contract of each platform service it plans to use. The spec is served live, so it is never out of date. |
-| 3. Plan | `build_plan` | Turns your description into records, roles and screens. You read it and say go. |
-| 4. Write | (your assistant) | Writes a small bundle: the data model, the configuration, the setup and the front end. |
-| 5. Check | `build_validate`, `build_doctor` | The platform checks the bundle and reports what to fix before anything is deployed. |
-| 6. Ship | `build_publish`, `build_deploy` or `build_go_live`, `build_deploy_status`, `build_smoke_test` | Publishes a version, deploys it, waits for it to come up, and tests the live URL. |
+| `ops` | logs, preflight checks, reports, deletes and teardown | `build_logs`, `build_doctor`, `build_report`, `build_audit`, `crud_delete`, `build_teardown`, `build_stage_bundle` |
+| `schemas` | change or delete schemas saved in a project | `schema_list_project`, `schema_update`, `schema_delete` |
+| `services` | platform services, integrations and example apps | `build_configure_services`, `build_import_services`, `build_recommend_integrations`, `build_get_service_contract`, `build_list_capabilities`, `build_get_examples`, `project_link_schemas` |
+| `sdk` | generate and download client SDKs | `sdk_list`, `sdk_status`, `sdk_generate`, `sdk_download` |
+| `testing` | smoke and end-to-end tests of a deployed app | `build_smoke_test`, `build_e2e_test`, `build_e2e_test_status`, `build_check_app_account` |
+| `connectors` | outside data sources and connector runs | `connector_status`, `connector_plugins`, `connector_test`, `connector_test_config`, `connector_enable`, `connector_disable`, `connector_run`, `connector_cancel`, `connector_discover`, `connector_discover_status`, `connector_discover_results`, `build_connect_data_source`, `build_discover_source`, `build_bind_data_source`, `build_run_data_source`, `build_list_data_sources`, `build_list_bound_schemas` |
+| `rbac` | check permissions and key scope | `rbac_check_permission`, `rbac_get_my_access`, `apikey_get_scope` |
+| `production` | permanent URL, live mode and project changes | `build_go_live`, `build_go_production`, `build_set_project_mode`, `build_update_project`, `build_replace_project` |
 
-A deploy usually takes a few minutes and can sit in `launching` for five or more. That is normal: the assistant should keep polling `build_deploy_status` for up to ten minutes before deciding something is wrong.
+Add `read_only=true` to keep only tools that change nothing. Every tool, with its arguments, is in [docs/tools.md](docs/tools.md).
 
-The full walk-through is in [docs/build-flow.md](docs/build-flow.md), and every tool is listed in [docs/tools.md](docs/tools.md) (69 tools with a key, about 50 when you sign in; you can list them without a key).
+<!-- tools:end -->
 
-**What you do not have to build.** Sign-in, roles and permissions, per-record and per-field access rules, the database, the REST API, the admin panel, and data kept apart between organisations in a multi-tenant app. There are also ready-made services to switch on instead of writing: bookings, appointments, rentals, cart, orders, payments, approvals, tasks, tickets, reviews, memberships, recurring plans, inventory, document signature, attachments, notifications, email and more. Ask the assistant to call `build_list_capabilities` to see them all.
+## Security and privacy
 
-## 6. Change it and ship it
+- Sign-in is OAuth with your Supero account. You choose which project the connection may use and whether it may publish, and you can review or revoke it at `https://app.supero.dev/oauth/connections`. Changing your Supero password or email ends every signed-in assistant connection.
+- Every tool call runs with your own permissions. Each customer organisation's data in a multi-tenant app is kept apart by the platform, not by the app's code.
+- Secrets for email, SMS or payments go in the app's admin panel, never in the bundle or this repo.
+- [Security](https://supero.dev/security), [privacy policy](https://supero.dev/privacy) and [terms](https://supero.dev/terms). Report a vulnerability privately as described in [SECURITY.md](SECURITY.md).
 
-- **Change the app.** Tell the assistant what to change. It fetches the current version with `build_get_bundle`, edits it, then validates, publishes and deploys again. The version number goes up each time.
-- **Preview or live.** `build_deploy` gives a preview URL that lasts about 30 minutes, which is enough to click through and share. `build_go_live` gives a permanent address on `supero.live` and needs a paid plan.
-- **Secrets.** Keys for email, SMS or payments go in the app's admin panel under **Services**. Never put one in the bundle.
-- **Dev and live mode.** A project starts in dev mode. Switch it to live mode before real users arrive.
-
-## Free plan limits
-
-| | Free |
-|---|---|
-| Price | $0, no card |
-| Projects | 3 |
-| Preview deployments | 10 per project, about 30 minutes each |
-| Schemas | 20 |
-| API requests | 10,000 a month |
-| Permanent live URL | From the Basic plan |
-
-These are the figures on the [pricing page](https://supero.dev/pricing) on 5 October 2026. That page is the authority if they differ. A plan and a validation pass cost nothing, so get `build_validate` clean before spending a preview. More in [docs/limits.md](docs/limits.md).
-
-## When something goes wrong
+## Support
 
 | You see | It means | Do this |
 |---|---|---|
-| ChatGPT or Claude asks for a key or a header | You used the key URL | Use `https://mcp.supero.dev/mcp` and sign in. See [the sign-in guide](docs/connect-chatgpt-claude.md). |
-| `Authentication required` | No key reached the server | Check the header is `X-API-Key` and the client was restarted after you added it. |
-| `401` or `Invalid API key` | The key is wrong, cut short, revoked, or has `Bearer` in front | Paste the raw `ak_...` value. If it is lost, rotate it under **API Keys**. |
-| The assistant cannot create a project | You gave it a project key | Create the project in the dashboard, or use a domain key. |
-| The assistant looks for a CLI or a `SKILLS.md` file | It is guessing from old habits | Send the recovery prompt from step 4. |
-| `build_validate` fails | The bundle breaks a rule | Let the assistant fix what it lists and run it again. This step is free. |
-| `build_doctor` warns that `workflows` "usually need elevated permission" | That warning is out of date | Ignore it. Workflows register and run with a project key (checked 6 October 2026). |
-| The app deployed but screens are half empty | Some starter data may not have been created. This was a platform fault, fixed on 5 October 2026 | If you still see it, ask the assistant to call `build_logs` and look for `SEED FAILURES`, deploy again, and please open an issue. |
-| Deploy stays in `launching` | The app is still starting | Wait. Poll for up to ten minutes. |
-| A status field will not save for ordinary users | Fields named `status` or `state` are protected | Name lifecycle fields `<something>_state`, for example `booking_state`. |
-| Out of previews | The free plan has ten | Validate more before deploying, or upgrade. |
+| ChatGPT or Claude asks for a key or a header | You used the key URL | Use `https://mcp.supero.dev/mcp` and sign in. |
+| A tool is refused with "is in the '…' tool group" | The connection URL doesn't include that group | Change the URL to the one the message gives and reconnect. |
+| `401` or `Invalid API key` | The key is wrong, cut short, revoked, or has `Bearer` in front | Paste the raw `ak_...` value, or rotate it under **API Keys**. |
+| The assistant looks for a CLI or a `SKILLS.md` file | There is none; the spec comes from the server | Ask it to call `build_get_skills` over MCP. |
+| `build_validate` fails | The bundle breaks a rule | Let the assistant fix what it lists and run it again. Validation is free. |
+| Deploy stays in `launching` | The app is still starting | Keep polling `build_deploy_status` for up to ten minutes. |
+| A status field won't save for ordinary users | Fields named `status` or `state` are protected | Name lifecycle fields `<something>_state`. |
 
-Still stuck? Ask in [Discussions](https://github.com/supero-platform/supero-mcp/discussions). Found a way to make the server misbehave? See [SECURITY.md](SECURITY.md) and report it privately.
+- Email: [info@supero.dev](mailto:info@supero.dev)
+- Bugs and requests: [GitHub issues](https://github.com/supero-platform/supero-mcp/issues)
+- Questions: [GitHub Discussions](https://github.com/supero-platform/supero-mcp/discussions)
+- Documentation: [docs.supero.dev](https://docs.supero.dev/developers/mcp/overview/), with a [guide to the most useful pages](docs/learn-more.md)
+- Client support status: [docs/client-compat.md](docs/client-compat.md)
 
-## Contribute
-
-There are four ways in, and none of them needs permission first. The [open issues](https://github.com/supero-platform/supero-mcp/issues) list good first ones, and we reply within a day.
-
-- **Publish an app.** Build a brief, or your own idea, and add it with its source to [community apps](apps/README.md).
-- **Improve someone else's app.** Deploy it into your own project, fix one of its known gaps, and send the change back.
-- **Write a brief** for an app you wish existed. Copy [projects/TEMPLATE.md](projects/TEMPLATE.md).
-- **Improve this guide**: a client we have not covered, a prompt that works better, an error we did not explain.
-
-[CONTRIBUTING.md](CONTRIBUTING.md) has the details.
-
-## Related
-
-- [supero-apps](https://github.com/supero-platform/supero-apps): 19 complete reference apps with source and live demos.
-- [MCP documentation](https://docs.supero.dev/developers/mcp/overview/) on docs.supero.dev, and a [guide to the feature pages](docs/learn-more.md) most useful while building.
-
-## Licence
+To contribute an app, a brief or a fix to this guide, see [CONTRIBUTING.md](CONTRIBUTING.md). Guidance files are generated: edit [guidance/build.md](guidance/build.md) and run `python3 scripts/gen-guidance`, then `scripts/check`.
 
 Everything in this repo is [MIT](LICENSE). An app you build is yours. The Supero platform itself is a hosted service and is not open source.
+
+[Privacy](https://supero.dev/privacy) · [Terms](https://supero.dev/terms) · [Security](https://supero.dev/security) · [info@supero.dev](mailto:info@supero.dev) · [Issues](https://github.com/supero-platform/supero-mcp/issues)

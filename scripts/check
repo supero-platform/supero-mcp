@@ -1,0 +1,135 @@
+#!/usr/bin/env python3
+"""Run every repo check that CI runs. Standard library only.
+
+    python3 scripts/check
+
+1. Repo structure, links and committed keys (scripts/check_repo.py).
+2. Generated guidance matches guidance/build.md (scripts/gen-guidance --check).
+3. Every tool name in the guidance and the generated files exists in docs/tool-groups.json.
+4. guidance/build.md reads as reference text (no ALWAYS/MUST/NEVER/IGNORE directives).
+5. Every JSON manifest parses, and the install manifests point at ?features=core while
+   server.json keeps the bare URL.
+6. The install links in README.md decode to ?features=core.
+"""
+import base64
+import json
+import pathlib
+import re
+import subprocess
+import sys
+import urllib.parse
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+CORE_URL = "https://mcp.supero.dev/mcp?features=core"
+BARE_URL = "https://mcp.supero.dev/mcp"
+GUIDED = ["guidance/build.md", "GEMINI.md", "AGENTS.md", "llms.txt", "llms-full.txt",
+          "plugins/supero/skills/supero-build/SKILL.md", "plugins/supero/rules/supero.mdc",
+          "plugins/supero-antigravity/skills/supero-build/SKILL.md",
+          "plugins/supero-antigravity/rules/AGENTS.md"]
+TOOL = re.compile(r"(?<![\w.])((?:build|schema|crud|sdk|connector|rbac|apikey|project)_[a-z0-9_]+)\b")
+NOT_TOOLS = {"schema_namespace"}  # identifiers that look like tool names but are fields
+DIRECTIVE = re.compile(r"\b(ALWAYS|MUST|NEVER|IGNORE)\b", re.I)
+errors = []
+
+
+def run(label, cmd):
+    r = subprocess.run([sys.executable] + cmd, cwd=ROOT, capture_output=True, text=True)
+    out = (r.stdout + r.stderr).strip()
+    print(f"[{label}] {out.splitlines()[-1] if out else ''}")
+    if r.returncode:
+        errors.append(f"{label} failed:\n{out}")
+
+
+def load(rel):
+    try:
+        return json.loads((ROOT / rel).read_text())
+    except (OSError, ValueError) as e:
+        errors.append(f"{rel}: not valid JSON ({e})")
+        return {}
+
+
+run("repo", ["scripts/check_repo.py"])
+run("guidance drift", ["scripts/gen-guidance", "--check"])
+
+groups = load("docs/tool-groups.json")
+known = set(groups.get("core", []))
+for names in groups.get("groups", {}).values():
+    known.update(names)
+seen = 0
+for rel in GUIDED:
+    p = ROOT / rel
+    if not p.exists():
+        errors.append(f"{rel}: missing")
+        continue
+    for name in TOOL.findall(p.read_text()):
+        seen += 1
+        if name not in known and name not in NOT_TOOLS:
+            errors.append(f"{rel}: names '{name}', which is not in core or any group in docs/tool-groups.json")
+print(f"[tool names] {seen} mentions checked against {len(known)} tools")
+
+hits = [f"guidance/build.md:{i}: {l.strip()}" for i, l in
+        enumerate((ROOT / "guidance/build.md").read_text().splitlines(), 1) if DIRECTIVE.search(l)]
+errors += [f"directive wording in {h}" for h in hits]
+print(f"[wording] {len(hits)} directive words in guidance/build.md")
+
+manifests = sorted(str(p.relative_to(ROOT)) for p in ROOT.rglob("*.json")
+                   if ".git" not in p.parts and "apps" not in p.parts)
+for rel in manifests:
+    load(rel)
+print(f"[json] {len(manifests)} JSON files parsed")
+
+
+def expect(rel, value, want):
+    if value != want:
+        errors.append(f"{rel}: server URL is {value!r}, expected {want!r}")
+
+
+# The Claude Code plugin keeps the bare URL: it was published with it, and changing it would
+# shrink existing installs to core and force a new sign-in. New install routes use core.
+expect("plugins/supero/.mcp.json", load("plugins/supero/.mcp.json").get("mcpServers", {}).get("supero", {}).get("url"), BARE_URL)
+expect("plugins/supero/mcp.json", load("plugins/supero/mcp.json").get("mcpServers", {}).get("supero", {}).get("url"), CORE_URL)
+expect("plugins/supero-antigravity/mcp_config.json", load("plugins/supero-antigravity/mcp_config.json").get("mcpServers", {}).get("supero", {}).get("serverUrl"), CORE_URL)
+expect("gemini-extension.json", load("gemini-extension.json").get("mcpServers", {}).get("supero", {}).get("httpUrl"), CORE_URL)
+server = load("server.json")
+expect("server.json", (server.get("remotes") or [{}])[0].get("url"), BARE_URL)
+if len(server.get("description", "")) > 100:
+    errors.append("server.json: description is over 100 characters")
+versions = {rel: load(rel).get("version") for rel in (
+    "plugins/supero/.claude-plugin/plugin.json", "plugins/supero/.cursor-plugin/plugin.json",
+    "plugins/supero-antigravity/plugin.json")}
+if len(set(versions.values())) != 1:
+    errors.append(f"plugin versions differ: {versions}")
+if load("gemini-extension.json").get("version") != server.get("version"):
+    errors.append("gemini-extension.json and server.json versions differ")
+for rel in (".claude-plugin/marketplace.json", ".cursor-plugin/marketplace.json"):
+    for e in load(rel).get("plugins", []):
+        if not (ROOT / e.get("source", "")).is_dir():
+            errors.append(f"{rel}: plugin source {e.get('source')!r} is not a directory")
+print("[manifests] URLs, versions and sources checked")
+
+readme = (ROOT / "README.md").read_text()
+links = 0
+for m in re.finditer(r"config=([A-Za-z0-9+/=]+)", readme):
+    links += 1
+    cfg = json.loads(base64.b64decode(m.group(1)))
+    if cfg.get("url") != CORE_URL:
+        errors.append(f"README.md: Cursor link config is {cfg}")
+for m in re.finditer(r"vscode\.dev/redirect\?url=([^)\s`]+)", readme):
+    links += 1
+    inner = urllib.parse.unquote(m.group(1))
+    m2 = re.match(r"vscode:mcp/install\?(.+)", inner)
+    cfg = json.loads(urllib.parse.unquote(m2.group(1))) if m2 else {}
+    if cfg.get("url") != CORE_URL or cfg.get("type") != "http":
+        errors.append(f"README.md: VS Code redirect link config is {cfg}")
+for m in re.finditer(r"`vscode:mcp/install\?([^`]+)`", readme):
+    links += 1
+    if json.loads(urllib.parse.unquote(m.group(1))).get("url") != CORE_URL:
+        errors.append("README.md: vscode:mcp/install link does not use ?features=core")
+if links < 4:
+    errors.append(f"README.md: expected Cursor and VS Code install links, found {links}")
+print(f"[install links] {links} README links decoded")
+
+if errors:
+    print("\nFAILED:\n" + "\n".join(errors))
+    sys.exit(1)
+print("\nall checks passed")

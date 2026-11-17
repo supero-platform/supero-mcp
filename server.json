@@ -2,13 +2,22 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.supero-platform/supero",
   "title": "Supero",
-  "description": "Build and deploy multi-tenant apps from ChatGPT, Claude or your editor. Sign in with OAuth or a key.",
+  "description": "Multi-tenant backend your coding agent configures over MCP: auth, RBAC, data, workflows, deploy.",
   "repository": {
     "url": "https://github.com/supero-platform/supero-mcp",
     "source": "github"
   },
-  "version": "2.0.2",
-  "websiteUrl": "https://docs.supero.dev/developers/mcp/connect-chatgpt-claude/",
+  "version": "2.1.0",
+  "websiteUrl": "https://supero.dev/?ref=mcp-registry",
+  "icons": [
+    {
+      "src": "https://www.supero.dev/icon-512.png",
+      "mimeType": "image/png",
+      "sizes": [
+        "512x512"
+      ]
+    }
+  ],
   "remotes": [
     {
       "type": "streamable-http",

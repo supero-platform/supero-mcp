@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "supero": {
+      "url": "https://mcp.supero.dev/mcp?features=core"
+    }
+  }
+}

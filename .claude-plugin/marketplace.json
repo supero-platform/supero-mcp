@@ -1,0 +1,30 @@
+{
+  "name": "supero",
+  "description": "Supero plugins for Claude Code: the multi-tenant backend your coding agent configures over MCP.",
+  "owner": {
+    "name": "Supero",
+    "email": "info@supero.dev",
+    "url": "https://supero.dev"
+  },
+  "plugins": [
+    {
+      "name": "supero",
+      "source": "./plugins/supero",
+      "description": "Multi-tenant backend your coding agent configures over MCP: auth, RBAC, data, workflows, deploy.",
+      "category": "development",
+      "tags": ["mcp", "app-builder", "backend", "deploy", "multi-tenant"],
+      "relevance": {
+        "topic": "Supero",
+        "signals": {
+          "hosts": ["mcp.supero.dev", "api.supero.dev", "app.supero.dev"],
+          "manifestDeps": [
+            {
+              "file": "[/\\\\]requirements\\.txt$",
+              "pattern": "(^|\\n)supero(?![-\\w.])"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

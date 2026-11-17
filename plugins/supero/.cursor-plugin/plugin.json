@@ -1,0 +1,17 @@
+{
+  "name": "supero",
+  "version": "1.1.0",
+  "description": "Multi-tenant backend your coding agent configures over MCP: auth, RBAC, data, workflows, deploy.",
+  "author": {
+    "name": "Supero",
+    "email": "info@supero.dev"
+  },
+  "homepage": "https://supero.dev/?ref=cursor-plugin",
+  "repository": "https://github.com/supero-platform/supero-mcp",
+  "license": "MIT",
+  "keywords": ["supero", "mcp", "backend", "multi-tenant", "rbac", "deploy"],
+  "logo": "icon.png",
+  "rules": "./rules",
+  "skills": "./skills",
+  "mcpServers": "./mcp.json"
+}
