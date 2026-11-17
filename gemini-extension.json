@@ -1,6 +1,6 @@
 {
   "name": "supero",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "Multi-tenant backend your coding agent configures over MCP: auth, RBAC, data, workflows, deploy.",
   "contextFileName": "GEMINI.md",
   "mcpServers": {
