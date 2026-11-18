@@ -23,7 +23,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 CORE_URL = "https://mcp.supero.dev/mcp?features=core"
 BARE_URL = "https://mcp.supero.dev/mcp"
 GUIDED = ["guidance/build.md", "GEMINI.md", "AGENTS.md", "llms.txt", "llms-full.txt",
-          "plugins/supero/skills/supero-build/SKILL.md", "plugins/supero/rules/supero.mdc",
+          "plugins/supero/skills/supero-build/SKILL.md", "plugins/supero-cursor/rules/supero.mdc", "plugins/supero-cursor/skills/supero-build/SKILL.md",
           "plugins/supero-antigravity/skills/supero-build/SKILL.md",
           "plugins/supero-antigravity/rules/AGENTS.md"]
 TOOL = re.compile(r"(?<![\w.])((?:build|schema|crud|sdk|connector|rbac|apikey|project)_[a-z0-9_]+)\b")
@@ -87,7 +87,7 @@ def expect(rel, value, want):
 # The Claude Code plugin keeps the bare URL: it was published with it, and changing it would
 # shrink existing installs to core and force a new sign-in. New install routes use core.
 expect("plugins/supero/.mcp.json", load("plugins/supero/.mcp.json").get("mcpServers", {}).get("supero", {}).get("url"), BARE_URL)
-expect("plugins/supero/mcp.json", load("plugins/supero/mcp.json").get("mcpServers", {}).get("supero", {}).get("url"), CORE_URL)
+expect("plugins/supero-cursor/mcp.json", load("plugins/supero-cursor/mcp.json").get("mcpServers", {}).get("supero", {}).get("url"), CORE_URL)
 expect("plugins/supero-antigravity/mcp_config.json", load("plugins/supero-antigravity/mcp_config.json").get("mcpServers", {}).get("supero", {}).get("serverUrl"), CORE_URL)
 expect("gemini-extension.json", load("gemini-extension.json").get("mcpServers", {}).get("supero", {}).get("httpUrl"), CORE_URL)
 server = load("server.json")
@@ -95,12 +95,16 @@ expect("server.json", (server.get("remotes") or [{}])[0].get("url"), BARE_URL)
 if len(server.get("description", "")) > 100:
     errors.append("server.json: description is over 100 characters")
 versions = {rel: load(rel).get("version") for rel in (
-    "plugins/supero/.claude-plugin/plugin.json", "plugins/supero/.cursor-plugin/plugin.json",
+    "plugins/supero/.claude-plugin/plugin.json", "plugins/supero-cursor/.cursor-plugin/plugin.json",
     "plugins/supero-antigravity/plugin.json")}
 if len(set(versions.values())) != 1:
     errors.append(f"plugin versions differ: {versions}")
 if load("gemini-extension.json").get("version") != server.get("version"):
     errors.append("gemini-extension.json and server.json versions differ")
+# The Claude plugin folder holds only files the Claude directory accepts from unverified
+# organizations; Cursor rules (.mdc) and Cursor manifests live in plugins/supero-cursor.
+for bad in list((ROOT / "plugins/supero").rglob("*.mdc")) + list((ROOT / "plugins/supero").rglob(".cursor-plugin")):
+    errors.append(f"{bad.relative_to(ROOT)}: Cursor files belong in plugins/supero-cursor")
 for rel in (".claude-plugin/marketplace.json", ".cursor-plugin/marketplace.json"):
     for e in load(rel).get("plugins", []):
         if not (ROOT / e.get("source", "")).is_dir():

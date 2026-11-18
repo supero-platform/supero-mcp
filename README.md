@@ -40,7 +40,7 @@ Use either the plugin or this command, not both, or the tools appear twice.
 
 **Cursor:** [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=supero&config=eyJ1cmwiOiJodHRwczovL21jcC5zdXBlcm8uZGV2L21jcD9mZWF0dXJlcz1jb3JlIn0=)
 
-The direct link is `cursor://anysphere.cursor-deeplink/mcp/install?name=supero&config=eyJ1cmwiOiJodHRwczovL21jcC5zdXBlcm8uZGV2L21jcD9mZWF0dXJlcz1jb3JlIn0=`. The repo also has a Cursor plugin in [`plugins/supero`](plugins/supero) with the server, a rule and the skill.
+The direct link is `cursor://anysphere.cursor-deeplink/mcp/install?name=supero&config=eyJ1cmwiOiJodHRwczovL21jcC5zdXBlcm8uZGV2L21jcD9mZWF0dXJlcz1jb3JlIn0=`. The repo also has a Cursor plugin in [`plugins/supero-cursor`](plugins/supero-cursor) with the server, a rule and the skill.
 
 **VS Code (GitHub Copilot):** [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_Supero-0098FF?logo=visualstudiocode&logoColor=white)](https://vscode.dev/redirect?url=vscode%3Amcp%2Finstall%3F%257B%2522name%2522%253A%2522supero%2522%252C%2522type%2522%253A%2522http%2522%252C%2522url%2522%253A%2522https%253A%252F%252Fmcp.supero.dev%252Fmcp%253Ffeatures%253Dcore%2522%257D)
 

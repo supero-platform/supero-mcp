@@ -10,7 +10,7 @@
   "plugins": [
     {
       "name": "supero",
-      "source": "./plugins/supero",
+      "source": "./plugins/supero-cursor",
       "description": "Multi-tenant backend your coding agent configures over MCP: auth, RBAC, data, workflows, deploy."
     }
   ]

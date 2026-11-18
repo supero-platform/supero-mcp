@@ -7,7 +7,8 @@
 guidance/build.md is the only file to edit. This script writes:
 
     plugins/supero/skills/supero-build/SKILL.md               Claude Code (and Cursor) skill
-    plugins/supero/rules/supero.mdc                           Cursor rule
+    plugins/supero-cursor/rules/supero.mdc                    Cursor rule
+    plugins/supero-cursor/skills/supero-build/SKILL.md        Cursor plugin skill
     plugins/supero-antigravity/skills/supero-build/SKILL.md   Antigravity skill
     plugins/supero-antigravity/rules/AGENTS.md                Antigravity always-on rule (short)
     GEMINI.md                                                 Gemini CLI extension context
@@ -106,7 +107,8 @@ def outputs(src):
     assert title
     return {
         "plugins/supero/skills/supero-build/SKILL.md": skill,
-        "plugins/supero/rules/supero.mdc": mdc,
+        "plugins/supero-cursor/rules/supero.mdc": mdc,
+        "plugins/supero-cursor/skills/supero-build/SKILL.md": skill,
         "plugins/supero-antigravity/skills/supero-build/SKILL.md": skill,
         "plugins/supero-antigravity/rules/AGENTS.md": short_rule,
         "GEMINI.md": plain,
