@@ -2,7 +2,7 @@
   "name": "supero",
   "displayName": "Supero",
   "version": "1.1.0",
-  "description": "Supero MCP server plus build skills: multi-tenant backend with auth, RBAC, data, workflows and deploy. Connects to https://mcp.supero.dev/mcp?features=core, where you sign in with your Supero account (no API key).",
+  "description": "Supero MCP server plus build skills: multi-tenant backend with auth, RBAC, data, workflows and deploy. Connects to https://mcp.supero.dev/mcp, where you sign in with your Supero account (no API key).",
   "author": {
     "name": "Supero",
     "email": "info@supero.dev",
