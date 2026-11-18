@@ -43,7 +43,7 @@ The groups:
 - **testing**: `build_smoke_test`, `build_e2e_test`, `build_e2e_test_status`, `build_check_app_account`.
 - **connectors**: outside data sources and connector runs, such as `connector_status`, `build_connect_data_source` and `build_list_data_sources`.
 - **rbac**: `rbac_check_permission`, `rbac_get_my_access`, `apikey_get_scope`.
-- **production**: `build_go_live`, `build_go_production`, `build_set_project_mode`, `build_update_project`, `build_replace_project`.
+- **production**: `build_go_live`, `build_go_production`, `build_production_status`, `build_set_project_mode`, `build_update_project`, `build_replace_project`. `build_production_status` only reads: use it to check where Go to production stands (`what`: status, plan, job, backup) and `build_go_production` for the steps that change data.
 
 A call to a tool outside the connection's groups is refused, and the refusal names the group and the URL to reconnect with. After the URL changes, the client reconnects and may ask for sign-in again.
 

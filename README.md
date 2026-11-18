@@ -114,7 +114,7 @@ Other tools come in groups. Add a group to the URL to get its tools, for example
 | `testing` | smoke and end-to-end tests of a deployed app | `build_smoke_test`, `build_e2e_test`, `build_e2e_test_status`, `build_check_app_account` |
 | `connectors` | outside data sources and connector runs | `connector_status`, `connector_plugins`, `connector_test`, `connector_test_config`, `connector_enable`, `connector_disable`, `connector_run`, `connector_cancel`, `connector_discover`, `connector_discover_status`, `connector_discover_results`, `build_connect_data_source`, `build_discover_source`, `build_bind_data_source`, `build_run_data_source`, `build_list_data_sources`, `build_list_bound_schemas` |
 | `rbac` | check permissions and key scope | `rbac_check_permission`, `rbac_get_my_access`, `apikey_get_scope` |
-| `production` | permanent URL, live mode and project changes | `build_go_live`, `build_go_production`, `build_set_project_mode`, `build_update_project`, `build_replace_project` |
+| `production` | permanent URL, live mode and project changes | `build_go_live`, `build_go_production`, `build_set_project_mode`, `build_update_project`, `build_replace_project`, `build_production_status` |
 
 Add `read_only=true` to keep only tools that change nothing. Every tool, with its arguments, is in [docs/tools.md](docs/tools.md).
 

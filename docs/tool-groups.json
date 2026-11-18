@@ -89,7 +89,8 @@
       "build_go_production",
       "build_set_project_mode",
       "build_update_project",
-      "build_replace_project"
+      "build_replace_project",
+      "build_production_status"
     ]
   }
 }
