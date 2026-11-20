@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use the Supero MCP server in teaching or research, please cite it as below."
+title: "Supero MCP server"
+type: software
+authors:
+  - name: "Supero"
+    website: "https://www.supero.dev"
+    email: "info@supero.dev"
+repository-code: "https://github.com/supero-platform/supero-mcp"
+url: "https://docs.supero.dev/developers/mcp/overview"
+abstract: "Remote Model Context Protocol server (https://mcp.supero.dev/mcp, OAuth sign-in) that lets AI coding assistants such as Claude, ChatGPT and Cursor define data models, publish and deploy multi-tenant web applications on Supero."
+keywords:
+  - Model Context Protocol
+  - MCP server
+  - AI coding assistants
+  - multi-tenant
+  - backend
+license: MIT
+version: "2.1.0"
+date-released: "2026-11-18"
